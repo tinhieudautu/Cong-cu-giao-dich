@@ -48,7 +48,7 @@ const dictionary = {
 };
 
 // Lấy ngôn ngữ mặc định (nếu đã lưu) hoặc mặc định là tiếng Việt 'vi'
-let currentLang = localStorage.getItem('siteLang') || 'vi';
+let currentLang = localStorage.getItem('siteLang') || 'en';
 let rawCryptoData = []; // Lưu trữ dữ liệu thô phục vụ dịch nhanh
 
 // 2. HÀM CHUYỂN ĐỔI NGÔN NGỮ VÀ CẬP NHẬT GIAO DIỆN

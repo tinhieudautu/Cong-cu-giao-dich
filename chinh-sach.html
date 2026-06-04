@@ -1,53 +1,113 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chính Sách Bảo Mật (Privacy Policy) - FINtechDATA</title>
+    <title>Privacy Policy - FINtechDATA</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
         body { background-color: #0b0e11; color: #eaecef; line-height: 1.8; padding: 40px 20px; }
         .policy-container { max-width: 800px; margin: 0 auto; background-color: #181a20; padding: 40px; border-radius: 8px; border: 1px solid #2b3139; }
-        h1 { color: #fff; font-size: 28px; margin-bottom: 10px; border-bottom: 2px solid #f0b90b; padding-bottom: 15px; }
+        .header-box { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #f0b90b; padding-bottom: 15px; margin-bottom: 20px; }
+        h1 { color: #fff; font-size: 26px; }
         h2 { color: #f0b90b; font-size: 18px; margin-top: 25px; margin-bottom: 10px; }
         p { color: #b7bdc6; font-size: 14px; text-align: justify; margin-bottom: 15px; }
-        ul { margin-left: 20px; margin-bottom: 15px; color: #b7bdc6; font-size: 14px; }
-        li { margin-bottom: 5px; }
-        .back-btn { display: inline-block; background-color: #212630; color: #fff; text-decoration: none; padding: 8px 16px; border-radius: 4px; font-size: 13px; font-weight: bold; margin-bottom: 20px; transition: 0.3s; border: 1px solid #474d57; }
+        .back-btn { display: inline-block; background-color: #212630; color: #fff; text-decoration: none; padding: 8px 16px; border-radius: 4px; font-size: 13px; font-weight: bold; transition: 0.3s; border: 1px solid #474d57; }
         .back-btn:hover { background-color: #2b313a; color: #f0b90b; }
-        footer { text-align: center; margin-top: 40px; font-size: 12px; color: #848e9c; }
+        
+        /* NÚT CHUYỂN ĐỔI NGÔN NGỮ */
+        .lang-switcher { display: flex; gap: 5px; background-color: #212630; padding: 4px; border-radius: 4px; border: 1px solid #474d57; }
+        .lang-btn { background: none; border: none; color: #848e9c; padding: 5px 10px; font-size: 12px; font-weight: bold; cursor: pointer; border-radius: 3px; transition: 0.2s; }
+        .lang-btn.active { background-color: #f0b90b; color: #000; }
+        
+        /* ẨN HIỆN NỘI DUNG */
+        .lang-section { display: none; }
+        .lang-section.active-content { display: block; }
+        footer { text-align: center; margin-top: 40px; font-size: 12px; color: #848e9c; border-top: 1px solid #2b3139; padding-top: 20px; }
     </style>
 </head>
 <body>
 
     <div class="policy-container">
-        <a href="index.html" class="back-btn">← Quay lại Trang Chủ</a>
+        <div class="header-box">
+            <a href="index.html" class="back-btn" id="btn-back">← Back to Home</a>
+            <div class="lang-switcher">
+                <button onclick="togglePolicyLang('vi')" id="p-btn-vi" class="lang-btn">VI</button>
+                <button onclick="togglePolicyLang('en')" id="p-btn-en" class="lang-btn active">EN</button>
+            </div>
+        </div>
         
-        <h1>Chính Sách Bảo Mật (Privacy Policy)</h1>
-        <p><em>Cập nhật lần cuối: Tháng 6 năm 2026</em></p>
-        
-        <p>Tại FINtechDATA (truy cập tại dulieudautu.site), một trong những ưu tiên hàng đầu của chúng tôi là bảo mật thông tin riêng tư của khách truy cập. Văn bản Chính sách bảo mật này chứa các loại thông tin được thu thập, ghi lại và cách chúng tôi sử dụng chúng.</p>
+        <div id="policy-en" class="lang-section active-content">
+            <h1>Privacy Policy</h1>
+            <p><em>Last updated: June 2026</em></p>
+            <p>At FINtechDATA, accessible from dulieudautu.site, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by FINtechDATA and how we use it.</p>
+            
+            <h2>1. Log Files</h2>
+            <p>FINtechDATA follows a standard procedure of using log files. These files log visitors when they visit websites. All hosting companies do this and a part of hosting services' analytics. The information collected by log files includes internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamp, referring/exit pages, and possibly the number of clicks. These are not linked to any information that is personally identifiable.</p>
 
-        <h2>1. Tệp nhật ký (Log Files)</h2>
-        <p>FINtechDATA tuân theo một quy trình chuẩn là sử dụng các tệp nhật ký. Những tệp này ghi lại khách truy cập khi họ truy cập trang web. Tất cả các công ty lưu trữ web (Hosting) đều làm việc này như một phần của dịch vụ phân tích. Thông tin được thu thập bởi các tệp nhật ký bao gồm địa chỉ giao thức Internet (IP), loại trình duyệt, Nhà cung cấp dịch vụ Internet (ISP), dấu thời gian ngày/giờ, các trang chuyển hướng/thoát và có thể là số lượng cú nhấp chuột. Những thông tin này không liên kết với bất kỳ thông tin nào có thể nhận dạng cá nhân. Mục đích của thông tin là để phân tích xu hướng, quản trị trang web, theo dõi hành vi người dùng trên trang web và thu thập thông tin nhân khẩu học.</p>
+            <h2>2. Cookies and Web Beacons</h2>
+            <p>Like any other website, FINtechDATA uses "cookies". These cookies are used to store information including visitors' preferences, and the pages on the website that the visitor accessed or visited. The information is used to optimize the users' experience by customizing our web page content based on visitors' browser type and/or other information, such as remembering your language preferences (VI/EN).</p>
 
-        <h2>2. Cookie và Web Beacons</h2>
-        <p>Giống như bất kỳ trang web nào khác, FINtechDATA sử dụng "cookie". Những cookie này được sử dụng để lưu trữ thông tin bao gồm các tùy chọn của khách truy cập và các trang trên trang web mà khách truy cập đã truy cập hoặc kiểm tra. Thông tin được sử dụng để tối ưu hóa trải nghiệm của người dùng bằng cách tùy chỉnh nội dung trang web của chúng tôi dựa trên loại trình duyệt của khách truy cập hoặc thông tin khác (ví dụ: Tự động ghi nhớ tùy chọn ngôn ngữ VI/EN của người dùng).</p>
+            <h2>3. Google DoubleClick DART Cookie</h2>
+            <p>Google is one of a third-party vendor on our site. It also uses cookies, known as DART cookies, to serve ads to our site visitors based upon their visit to dulieudautu.site and other sites on the internet. However, visitors may choose to decline the use of DART cookies by visiting the Google ad and content network Privacy Policy at the following URL: <a href="https://policies.google.com/technologies/ads" style="color: #f0b90b;" target="_blank">https://policies.google.com/technologies/ads</a></p>
 
-        <h2>3. Cookie DoubleClick DART của Google (Bắt buộc cho AdSense)</h2>
-        <p>Google là một trong những nhà cung cấp bên thứ ba trên trang web của chúng tôi. Google cũng sử dụng cookie, được gọi là cookie DART, để phục vụ các quảng cáo dựa trên việc khách truy cập trang web của chúng tôi truy cập dulieudautu.site và các trang web khác trên internet. Tuy nhiên, khách truy cập có thể chọn từ chối sử dụng cookie DART bằng cách truy cập Chính sách bảo mật của mạng quảng cáo và nội dung của Google tại đường dẫn sau: <a href="https://policies.google.com/technologies/ads" style="color: #f0b90b;" target="_blank">https://policies.google.com/technologies/ads</a></p>
+            <h2>4. Our Advertising Partners</h2>
+            <p>Some of advertisers on our site may use cookies and web beacons. Our advertising partner is **Google AdSense**. Third-party ad servers or ad networks uses technologies like cookies, JavaScript, or Web Beacons that are used in their respective advertisements and links that appear on FINtechDATA, which are sent directly to users' browser. They automatically receive your IP address when this occurs.</p>
 
-        <h2>4. Đối tác quảng cáo của chúng tôi</h2>
-        <p>Một số nhà quảng cáo trên trang web của chúng tôi có thể sử dụng cookie và web beacons. Đối tác quảng cáo chính của chúng tôi là **Google AdSense**. Các máy chủ quảng cáo hoặc mạng quảng cáo của bên thứ ba này sử dụng công nghệ trong các quảng cáo và liên kết tương ứng xuất hiện trên FINtechDATA, được gửi trực tiếp đến trình duyệt của người dùng. Họ tự động nhận được địa chỉ IP của bạn khi điều này xảy ra. Các công nghệ này được sử dụng để đo lường hiệu quả của các chiến dịch quảng cáo của họ hoặc cá nhân hóa nội dung quảng cáo mà bạn nhìn thấy trên các trang web bạn truy cập.</p>
-        <p><em>Lưu ý: FINtechDATA không có quyền truy cập hoặc kiểm soát các cookie này do các nhà quảng cáo bên thứ ba sử dụng.</em></p>
+            <h2>5. Consent</h2>
+            <p>By using our website, you hereby consent to our Privacy Policy and agree to its Terms and Conditions.</p>
+        </div>
 
-        <h2>5. Sự chấp thuận</h2>
-        <p>Bằng việc sử dụng trang web của chúng tôi, bạn đã đồng ý với Chính sách bảo mật của chúng tôi và đồng ý với các Điều khoản và Điều kiện của trang web.</p>
+        <div id="policy-vi" class="lang-section">
+            <h1>Chính Sách Bảo Mật</h1>
+            <p><em>Cập nhật lần cuối: Tháng 6 năm 2026</em></p>
+            <p>Tại FINtechDATA (truy cập tại dulieudautu.site), một trong những ưu tiên hàng đầu của chúng tôi là bảo mật thông tin riêng tư của khách truy cập. Văn bản Chính sách bảo mật này chứa các loại thông tin được thu thập và cách chúng tôi sử dụng chúng.</p>
+            
+            <h2>1. Tệp nhật ký (Log Files)</h2>
+            <p>FINtechDATA tuân theo một quy trình chuẩn là sử dụng các tệp nhật ký. Những tệp này ghi lại khách truy cập khi họ truy cập trang web. Thông tin được thu thập bởi các tệp nhật ký bao gồm địa chỉ IP, loại trình duyệt, Nhà cung cấp dịch vụ Internet (ISP), dấu thời gian ngày/giờ, các trang chuyển hướng và số lượng cú nhấp chuột. Những thông tin này không liên kết với bất kỳ thông tin nào có thể nhận dạng cá nhân.</p>
+
+            <h2>2. Cookie và Web Beacons</h2>
+            <p>Giống như bất kỳ trang web nào khác, FINtechDATA sử dụng "cookie". Những cookie này được sử dụng để lưu trữ thông tin bao gồm các tùy chọn của khách truy cập và dữ liệu ghi nhớ cấu hình hệ thống (như tùy chọn ngôn ngữ VI/EN) nhằm tối ưu hóa trải nghiệm.</p>
+
+            <h2>3. Cookie DoubleClick DART của Google</h2>
+            <p>Google là nhà cung cấp bên thứ ba trên trang web của chúng tôi. Google sử dụng cookie DART để phục vụ các quảng cáo dựa trên việc khách truy cập trang web của chúng tôi truy cập hệ thống. Khách truy cập có thể chọn từ chối sử dụng cookie DART bằng cách truy cập Chính sách bảo mật của mạng quảng cáo và nội dung của Google.</p>
+
+            <h2>4. Đối tác quảng cáo</h2>
+            <p>Đối tác quảng cáo chính của chúng tôi là **Google AdSense**. Các máy chủ quảng cáo của bên thứ ba sử dụng công nghệ trong các quảng cáo xuất hiện trên FINtechDATA và gửi trực tiếp đến trình duyệt của người dùng. Họ tự động nhận được địa chỉ IP của bạn khi điều này xảy ra.</p>
+
+            <h2>5. Sự chấp thuận</h2>
+            <p>Bằng việc sử dụng trang web của chúng tôi, bạn đã đồng ý với Chính sách bảo mật của chúng tôi và đồng ý với các Điều khoản và Điều kiện của trang web.</p>
+        </div>
 
         <footer>
-            <p>© 2026 FINtechDATA. Bảo lưu mọi quyền.</p>
+            <p>© 2026 FINtechDATA. All rights reserved.</p>
         </footer>
     </div>
 
+    <script>
+        function applyPolicyLang(lang) {
+            // Ẩn tất cả các khối nội dung
+            document.getElementById('policy-en').classList.remove('active-content');
+            document.getElementById('policy-vi').classList.remove('active-content');
+            document.getElementById('p-btn-en').classList.remove('active');
+            document.getElementById('p-btn-vi').classList.remove('active');
+
+            // Hiển thị khối nội dung được chọn
+            document.getElementById(`policy-${lang}`).classList.add('active-content');
+            document.getElementById(`p-btn-${lang}`).classList.add('active');
+            
+            // Đổi chữ nút quay lại cho hợp ngữ cảnh
+            document.getElementById('btn-back').innerText = lang === 'en' ? '← Back to Home' : '← Quay lại Trang Chủ';
+        }
+
+        function togglePolicyLang(lang) {
+            localStorage.setItem('siteLang', lang); // Lưu cấu hình đồng bộ sang trang chủ
+            applyPolicyLang(lang);
+        }
+
+        // Tự động kiểm tra bộ nhớ máy khi vừa mở trang chính sách
+        const savedLang = localStorage.getItem('siteLang') || 'en';
+        applyPolicyLang(savedLang);
+    </script>
 </body>
 </html>

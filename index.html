@@ -3,168 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cổng Công Cụ & Dữ Liệu Đầu Tư Tài Chính Tự Động</title>
+    <title>FINtechDATA - Cổng Dữ Liệu Đầu Tư</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- THANH ĐIỀU HƯỚNG CHUYÊN NGHIỆP -->
     <header>
         <div class="nav-container">
             <div class="logo">FINtech<span>DATA</span></div>
             <nav>
-                <a href="#crypto-section">Thị Trường Crypto</a>
-                <a href="#gold-section">Giá Vàng & Kim Loại</a>
-                <a href="#calc-section">Máy Tính Đầu Tư</a>
-                <a href="#knowledge-section">Cẩm Nang Kiến Thức</a>
+                <a href="#crypto-section" id="nav-crypto">Thị Trường Crypto</a>
+                <a href="#gold-section" id="nav-gold">Giá Vàng & Kim Loại</a>
+                <a href="#calc-section" id="nav-calc">Máy Tính Đầu Tư</a>
+                <a href="#knowledge-section" id="nav-knowledge">Cẩm Nang Kiến Thức</a>
             </nav>
+            <div class="lang-switcher">
+                <button onclick="setLanguage('vi')" id="btn-lang-vi" class="lang-btn active">VI</button>
+                <button onclick="setLanguage('en')" id="btn-lang-en" class="lang-btn">EN</button>
+            </div>
         </div>
     </header>
 
     <div class="main-container">
         
-        <!-- VỊ TRÍ QUẢNG CÁO TOP BANNER (AD SENSE) -->
         <div class="ad-box ad-top">
             <p>[Vị trí Quảng cáo Google AdSense - Banner Ngang Thượng Cấp]</p>
         </div>
 
-        <!-- TIÊU ĐỀ CHÍNH -->
         <section class="hero-section">
-            <h1>Hệ Thống Tiện Ích & Dữ Liệu Đầu Tư Phân Tích Tự Động</h1>
-            <p>Cập nhật chỉ số thời gian thực • Công cụ tính toán hiệu suất dòng tiền • Phân tích hệ thống Rule-Based</p>
+            <h1 id="hero-title">Hệ Thống Tiện Ích & Dữ Liệu Đầu Tư Phân Tích Tự Động</h1>
+            <p id="hero-desc">Cập nhật chỉ số thời gian thực • Công cụ tính toán hiệu suất dòng tiền • Phân tích hệ thống Rule-Based</p>
         </section>
 
-        <!-- PHÂN KHU 1: THỊ TRƯỜNG CRYPTO -->
         <section id="crypto-section" class="card-section">
             <div class="section-header">
-                <h2>📊 Dữ Liệu Chỉ Báo Crypto (Thời Gian Thực)</h2>
+                <h2 id="title-crypto">📊 Dữ Liệu Chỉ Báo Crypto (Thời Gian Thực)</h2>
                 <span class="badge">Auto-Update</span>
             </div>
             <div class="table-responsive">
                 <table>
                     <thead>
                         <tr>
-                            <th>Tài Sản</th>
-                            <th>Giá Hiện Tại</th>
-                            <th>MACD</th>
-                            <th>Stoch RSI</th>
-                            <th>Chỉ số ATR</th>
-                            <th>Cấu Trúc Thị Trường</th>
-                            <th>Tín Hiệu Hệ Thống</th>
+                            <th id="th-asset">Tài Sản</th>
+                            <th id="th-price">Giá Hiện Tại</th>
+                            <th id="th-macd">MACD</th>
+                            <th id="th-stoch">Stoch RSI</th>
+                            <th id="th-atr">Chỉ số ATR</th>
+                            <th id="th-struct">Cấu Trúc Thị Trường</th>
+                            <th id="th-signal">Tín Hiệu Hệ Thống</th>
                         </tr>
                     </thead>
                     <tbody id="data-body">
                         <tr>
-                            <td colspan="7">Đang kết nối API cơ sở dữ liệu...</td>
+                            <td colspan="7" id="text-loading">Đang kết nối API cơ sở dữ liệu...</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </section>
 
-        <!-- KHU VỰC QUẢNG CÁO GIỮA TRANG -->
         <div class="ad-box ad-middle">
             <p>[Vị trí Đặt Quảng cáo Tự động giữa các phân khu dữ liệu]</p>
         </div>
 
-        <!-- PHÂN KHU 2: GIÁ VÀNG & KIM LOẠI QUÝ -->
         <section id="gold-section" class="card-section">
             <div class="section-header">
-                <h2>🏆 Tra Cứu Giá Vàng & Kim Loại Quý</h2>
+                <h2 id="title-gold">🏆 Tra Cứu Giá Vàng & Kim Loại Quý</h2>
                 <span class="badge gold">Gold API</span>
             </div>
             <div class="grid-2">
                 <div class="gold-item">
-                    <h3>Vàng Thế Giới (XAU/USD)</h3>
+                    <h3 id="label-gold-world">Vàng Thế Giới (XAU/USD)</h3>
                     <p class="price-display" id="gold-world">Loading...</p>
                 </div>
                 <div class="gold-item">
-                    <h3>Bạc Thế Giới (XAG/USD)</h3>
+                    <h3 id="label-silver-world">Bạc Thế Giới (XAG/USD)</h3>
                     <p class="price-display silver" id="silver-world">Loading...</p>
                 </div>
             </div>
         </section>
 
-        <!-- PHÂN KHU 3: MÁY TÍNH ĐẦU TƯ BẤT ĐỘNG SẢN & TÀI SẢN -->
         <section id="calc-section" class="card-section">
             <div class="section-header">
-                <h2>🧮 Máy Tính Hiệu Suất Đầu Tư Bất Động Sản & Dòng Tiền</h2>
+                <h2 id="title-calc">🧮 Máy Tính Hiệu Suất Đầu Tư Bất Động Sản & Dòng Tiền</h2>
             </div>
-            <p class="calc-desc">Nhập thông số dự án hoặc bất động sản (đất nền, chung cư) để hệ thống tự động tính toán tỷ suất sinh lời ROI và chu kỳ hoàn vốn.</p>
+            <p class="calc-desc" id="calc-desc">Nhập thông số dự án hoặc bất động sản (đất nền, chung cư) để hệ thống tự động tính toán tỷ suất sinh lời ROI và chu kỳ hoàn vốn.</p>
             
             <div class="grid-2-calc">
                 <div class="calc-inputs">
                     <div class="input-group">
-                        <label>Vốn đầu tư ban đầu (VND):</label>
+                        <label id="label-in-1">Vốn đầu tư ban đầu (VND):</label>
                         <input type="number" id="invest-amount" value="2000000000">
                     </div>
                     <div class="input-group">
-                        <label>Thu nhập ròng từ sản phẩm hàng năm (VND):</label>
+                        <label id="label-in-2">Thu nhập ròng từ sản phẩm hàng năm (VND):</label>
                         <input type="number" id="annual-income" value="120000000">
                     </div>
                     <div class="input-group">
-                        <label>Tốc độ tăng giá trị tài sản kỳ vọng (%/năm):</label>
+                        <label id="label-in-3">Tốc độ tăng giá trị tài sản kỳ vọng (%/năm):</label>
                         <input type="number" id="growth-rate" value="8">
                     </div>
-                    <button onclick="calculateROI()" class="btn-calc">Kích Hoạt Tính Toán</button>
+                    <button onclick="calculateROI()" class="btn-calc" id="btn-calc-action">Kích Hoạt Tính Toán</button>
                 </div>
                 
                 <div class="calc-results">
-                    <h3>Kết Quả Phân Tích Dòng Tiền:</h3>
-                    <div class="result-item">Tỷ suất lợi nhuận dòng tiền: <span id="res-roi">0%</span></div>
-                    <div class="result-item">Dự kiến giá trị tài sản sau 3 năm: <span id="res-future">0 VND</span></div>
-                    <div class="result-item">Thời gian hoàn vốn ròng: <span id="res-period">0 năm</span></div>
+                    <h3 id="title-calc-res">Kết Quả Phân Tích Dòng Tiền:</h3>
+                    <div class="result-item"><span id="label-res-1">Tỷ suất lợi nhuận dòng tiền:</span> <strong id="res-roi">0%</strong></div>
+                    <div class="result-item"><span id="label-res-2">Dự kiến giá trị tài sản sau 3 năm:</span> <strong id="res-future">0 VND</strong></div>
+                    <div class="result-item"><span id="label-res-3">Thời gian hoàn vốn ròng:</span> <strong id="res-period">0 năm</strong></div>
                 </div>
             </div>
         </section>
 
-        <!-- PHÂN KHU 4: CẨM NANG KIẾN THỨC CHUYÊN SÂU (BÙA HỘ MỆNH DUYỆT ADSENSE) -->
         <section id="knowledge-section" class="card-section content-rich">
             <div class="section-header">
-                <h2>📚 Cẩm Nang Phân Tích Kỹ Thuật & Tối Ưu Hóa Vốn Đầu Tư</h2>
+                <h2 id="title-knowledge">📚 Cẩm Nang Phân Tích Kỹ Thuật & Tối Ưu Hóa Vốn Đầu Tư</h2>
             </div>
             
-            <div class="article">
-                <h3>1. Hệ thống tín hiệu toán học cố định (Rule-Based Trading) là gì?</h3>
-                <p>Khác với các phương pháp giao dịch dựa trên cảm xúc, hệ thống Rule-Based hoạt động hoàn toàn dựa trên các quy tắc toán học khắt khe và các chỉ báo kỹ thuật có sẵn. Hệ thống trên trang web của chúng tôi quét dữ liệu thị trường và chỉ đưa ra tín hiệu khi có sự hội tụ đồng thời của các yếu tố kỹ thuật, loại bỏ hoàn toàn tâm lý nhiễu của con người.</p>
-            </div>
-
-            <div class="article">
-                <h3>2. Ý nghĩa của các chỉ báo MACD, Stoch RSI và chỉ số ATR</h3>
-                <p><strong>Chỉ báo MACD (Moving Average Convergence Divergence):</strong> Xuất phát từ các đường trung bình động để xác định xu hướng chính của thị trường. Khi đường MACD cắt lên đường tín hiệu, đó là biểu thị lực mua đang quay trở lại mạnh mẽ.</p>
-                <p><strong>Stoch RSI (Stochastic RSI):</strong> Bộ dao động đo lường mức độ quá mua hoặc quá bán của một tài sản trong một khung thời gian cố định. Mức chỉ số dưới 20 biểu thị tài sản đang rơi vào vùng quá bán sâu, mở ra cơ hội tích lũy tiềm năng.</p>
-                <p><strong>Chỉ số ATR (Average True Range):</strong> Thước đo tiêu chuẩn để đo lường mức độ biến động (volatility) của thị trường. Chỉ số ATR cao cảnh báo thị trường đang dao động rất mạnh, các nhà giao dịch cần nới rộng khoảng cách cắt lỗ để bảo vệ tài khoản.</p>
-            </div>
-
-            <div class="article">
-                <h3>3. Phân tích Cấu trúc thị trường và Vùng mất cân bằng (Fair Value Gaps - FVG)</h3>
-                <p>Cấu trúc thị trường (Market Structure) thông qua các điểm phá vỡ xu hướng cũ (CHoCH) hoặc tiếp diễn xu hướng mới (BOS) giúp nhà đầu tư biết được dòng tiền lớn đang dịch chuyển theo hướng nào. Bên cạnh đó, các vùng mất cân bằng giá (Fair Value Gaps) đóng vai trò như một thỏi nam châm hút giá quay trở lại để lấp đầy khoảng trống thanh khoản trước khi tiếp tục xu hướng chính.</p>
-            </div>
-
-            <div class="article">
-                <h3>4. Cách tính toán hiệu suất dòng tiền khi đầu tư Bất động sản</h3>
-                <p>Để tối ưu hóa danh mục đầu tư, đặc biệt là các bất động sản vùng ven hoặc chung cư cho thuê, việc tính toán tỷ suất ROI dựa trên thu nhập dòng tiền thực tế và tốc độ tăng trưởng vốn là vô cùng quan trọng. Công cụ tính toán tích hợp phía trên sử dụng công thức chiết khấu dòng tiền cơ bản giúp bạn có cái nhìn tổng quan về thời gian thu hồi vốn và giá trị tài sản trong tương lai một cách khoa học nhất.</p>
-            </div>
+            <div id="knowledge-content">
+                </div>
         </section>
 
-        <!-- KHU VỰC LIÊN KẾT ĐỐI TÁC (AFFILIATE) -->
         <div class="affiliate-bar">
-            <h3>Bắt đầu hành trình đầu tư của bạn với các nền tảng uy tín:</h3>
+            <h3 id="title-aff">Bắt đầu hành trình đầu tư của bạn với các nền tảng uy tín:</h3>
             <div class="aff-links">
-                <a href="#" class="btn-aff">Mở Tài Khoản Giao Dịch Crypto</a>
-                <a href="#" class="btn-aff gold-btn">Đăng Ký Sàn Giao Dịch Vàng</a>
+                <a href="#" class="btn-aff" id="btn-aff-crypto">Mở Tài Khoản Giao Dịch Crypto</a>
+                <a href="#" class="btn-aff gold-btn" id="btn-aff-gold">Đăng Ký Sàn Giao Dịch Vàng</a>
             </div>
         </div>
 
     </div>
 
-    <!-- FOOTER BẮT BUỘC CỦA GOOGLE ADSENSE -->
     <footer>
         <p>© 2026 FINtechDATA. All rights reserved.</p>
         <p>
-            <a href="#">Chính Sách Bảo Mật (Privacy Policy)</a> | 
-            <a href="#">Điều Khoản Sử Dụng</a> | 
-            <a href="#">Liên Hệ Hợp Tác</a>
+            <a href="#" id="footer-privacy">Chính Sách Bảo Mật (Privacy Policy)</a> | 
+            <a href="#" id="footer-terms">Điều Khoản Sử Dụng</a> | 
+            <a href="#" id="footer-contact">Liên Hệ Hợp Tác</a>
         </p>
     </footer>
 

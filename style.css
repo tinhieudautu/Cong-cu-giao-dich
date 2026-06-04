@@ -339,3 +339,33 @@ footer a:hover {
     nav a { margin: 0 10px; }
     .grid-2, .grid-2-calc { grid-template-columns: 1fr; }
 }
+/* NÚT CHUYỂN ĐỔI NGÔN NGỮ VI/EN */
+.lang-switcher {
+    display: flex;
+    gap: 5px;
+    background-color: #212630;
+    padding: 4px;
+    border-radius: 4px;
+    border: 1px solid #474d57;
+}
+
+.lang-btn {
+    background: none;
+    border: none;
+    color: #848e9c;
+    padding: 5px 10px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: 0.2s;
+}
+
+.lang-btn.active {
+    background-color: #f0b90b;
+    color: #000;
+}
+
+.lang-btn:hover:not(.active) {
+    color: #fff;
+}

@@ -1,5 +1,8 @@
 const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxyoTACI2-r7SBG5X1_-r_luqq0SsdnFwugEeLhkXzdIy4Ib4BjjJ57GW1jMsgnwgAUgA/exec';
 
+// =========================================================================
+// 1. TỪ ĐIỂN DỊCH THUẬT (Đã cập nhật tỷ lệ hiển thị VND và USD)
+// =========================================================================
 const dictionary = {
     vi: {
         navCrypto: "Thị Trường Crypto", navGold: "Giá Vàng & Kim Loại", navCalc: "Máy Tính Đầu Tư", navKnowledge: "Cẩm Nang Kiến Thức",
@@ -25,7 +28,7 @@ const dictionary = {
         thAsset: "Asset", thPrice: "Current Price", thMacd: "MACD", thStoch: "Stoch RSI", thAtr: "ATR Index", thStruct: "Market Structure", thSignal: "System Signal",
         labelGold: "Gold Spot (XAU/USD)", labelSilver: "Silver Spot (XAG/USD)", titleNews: "📰 Global Financial News Feed",
         calcDesc: "Enter project or real estate metrics (land plots, apartments) to automatically calculate ROI and payback period.",
-        labelIn1: "Initial Investment Capital (VND):", labelIn2: "Annual Net Rental/Product Income (VND):", labelIn3: "Expected Asset Growth Rate (%/year):", btnCalcAction: "Trigger Calculations",
+        labelIn1: "Initial Investment Capital (USD):", labelIn2: "Annual Net Rental/Product Income (USD):", labelIn3: "Expected Asset Growth Rate (%/year):", btnCalcAction: "Trigger Calculations",
         titleCalcRes: "Cash Flow Analysis Results:", labelRes1: "Cash Flow Yield Rate:", labelRes2: "Projected Asset Value (3 Years):", labelRes3: "Net Payback Period:",
         titleAff: "Start your investment journey with trusted platforms:", btnAffCrypto: "Open Crypto Trading Account", btnAffGold: "Register Gold Trading Account",
         fPrivacy: "Privacy Policy", fTerms: "Terms of Service", fContact: "Contact Partnership", unitYear: "years",
@@ -35,11 +38,17 @@ const dictionary = {
     }
 };
 
+// Mặc định hiển thị tiếng Anh (en) như cấu hình chương trước
 let currentLang = localStorage.getItem('siteLang') || 'en';
-let masterData = { trading: [], news: [] }; // Lưu trữ Master Object nhận về từ Sheets
+let masterData = { trading: [], news: [] }; 
 
+// =========================================================================
+// 2. HÀM ĐỔI NGÔN NGỮ VÀ ĐIỀU CHỈNH Ô NHẬP LIỆU (VND / USD)
+// =========================================================================
 function applyLanguage() {
     const lang = dictionary[currentLang];
+    
+    // Dịch toàn bộ giao diện chữ tĩnh
     document.getElementById('nav-crypto').innerText = lang.navCrypto;
     document.getElementById('nav-gold').innerText = lang.navGold;
     document.getElementById('nav-calc').innerText = lang.navCalc;
@@ -81,9 +90,18 @@ function applyLanguage() {
     document.getElementById('btn-lang-en').classList.remove('active');
     document.getElementById(`btn-lang-${currentLang}`).classList.add('active');
 
+    // TỰ ĐỘNG ĐỔI GIÁ TRỊ GỢI Ý TRONG Ô INPUT PHÙ HỢP VỚI ĐỒNG TIỀN
+    if (currentLang === 'en') {
+        document.getElementById('invest-amount').value = "100000"; // $100,000 USD
+        document.getElementById('annual-income').value = "8000";   // $8,000 USD
+    } else {
+        document.getElementById('invest-amount').value = "2000000000"; // 2 Tỷ VND
+        document.getElementById('annual-income').value = "120000000";  // 120 Triệu VND
+    }
+
     renderTradingTable();
     renderNewsFeed();
-    calculateROI();
+    calculateROI(); // Kích hoạt tính toán lại theo đồng tiền mới
 }
 
 function setLanguage(lang) {
@@ -92,7 +110,38 @@ function setLanguage(lang) {
     applyLanguage();
 }
 
-// ĐỔ DỮ LIỆU BẢNG CHỈ BÁO CRYPTO
+// =========================================================================
+// 3. MÁY TÍNH HIỆU SUẤT ĐẦU TƯ ĐA TIỀN TỆ (ĐA NGÔN NGỮ)
+// =========================================================================
+function calculateROI() {
+    const investAmount = parseFloat(document.getElementById('invest-amount').value);
+    const annualIncome = parseFloat(document.getElementById('annual-income').value);
+    const growthRate = parseFloat(document.getElementById('growth-rate').value) / 100;
+
+    if (isNaN(investAmount) || isNaN(annualIncome) || investAmount <= 0) return;
+
+    // 1. Tính tỷ suất dòng tiền
+    const roi = (annualIncome / investAmount) * 100;
+    document.getElementById('res-roi').innerText = roi.toFixed(2) + "% " + (currentLang === 'vi' ? "/ năm" : "/ year");
+
+    // 2. Tính giá trị tài sản tương lai sau 3 năm
+    const futureValue = investAmount * Math.pow((1 + growthRate), 3);
+    
+    // ĐIỀU CHỈNH HIỂN THỊ ĐỊNH DẠNG USD HOẶC VND THEO NGÔN NGỮ
+    if (currentLang === 'vi') {
+        document.getElementById('res-future').innerText = Math.round(futureValue).toLocaleString() + " VND";
+    } else {
+        document.getElementById('res-future').innerText = "$" + Math.round(futureValue).toLocaleString() + " USD";
+    }
+
+    // 3. Tính thời gian hoàn vốn
+    const period = investAmount / annualIncome;
+    document.getElementById('res-period').innerText = period.toFixed(1) + " " + dictionary[currentLang].unitYear;
+}
+
+// =========================================================================
+// 4. CÁC HÀM XỬ LÝ DỮ LIỆU ĐỘNG CRYPTO & TIN TỨC (Giữ nguyên cấu trúc cũ)
+// =========================================================================
 function renderTradingTable() {
     const tableBody = document.getElementById('data-body');
     if (!masterData.trading || masterData.trading.length === 0) return;
@@ -120,7 +169,6 @@ function renderTradingTable() {
     });
 }
 
-// ĐỔ DỮ LIỆU BẢN TIN TỨC TỰ ĐỘNG
 function renderNewsFeed() {
     const newsContainer = document.getElementById('news-container');
     if (!masterData.news || masterData.news.length === 0) return;
@@ -128,9 +176,7 @@ function renderNewsFeed() {
     const lang = dictionary[currentLang];
 
     masterData.news.forEach(item => {
-        // Dịch nhãn danh mục (Ví dụ: Finance -> Tài chính)
         const displayTag = lang.tagMap[item.category] || item.category;
-        
         const div = document.createElement('div');
         div.className = 'news-card';
         div.innerHTML = `
@@ -157,20 +203,7 @@ async function fetchMasterData() {
     }
 }
 
-function calculateROI() {
-    const investAmount = parseFloat(document.getElementById('invest-amount').value);
-    const annualIncome = parseFloat(document.getElementById('annual-income').value);
-    const growthRate = parseFloat(document.getElementById('growth-rate').value) / 100;
-    if (isNaN(investAmount) || isNaN(annualIncome) || investAmount <= 0) return;
-    const roi = (annualIncome / investAmount) * 100;
-    document.getElementById('res-roi').innerText = roi.toFixed(2) + "% " + (currentLang === 'vi' ? "/ năm" : "/ year");
-    const futureValue = investAmount * Math.pow((1 + growthRate), 3);
-    document.getElementById('res-future').innerText = Math.round(futureValue).toLocaleString() + " VND";
-    const period = investAmount / annualIncome;
-    document.getElementById('res-period').innerText = period.toFixed(1) + " " + dictionary[currentLang].unitYear;
-}
-
 // KHỞI ĐỘNG HỆ THỐNG
 applyLanguage();
 fetchMasterData();
-setInterval(fetchMasterData, 60000); // Tự động kéo dữ liệu mới sau mỗi 60 giây
+setInterval(fetchMasterData, 60000);

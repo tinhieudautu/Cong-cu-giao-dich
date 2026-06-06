@@ -209,8 +209,18 @@ function renderNewsFeed() {
     newsContainer.innerHTML = '';
     const lang = dictionary[currentLang];
 
-    masterData.news.forEach(item => {
-        const displayTag = lang.tagMap[item.category] || item.category;
+    // LỌC TIN TỨC: Chỉ lấy các bản tin có nhãn ngôn ngữ (en/vi) khớp với ngôn ngữ đang chọn
+    const filteredNews = masterData.news.filter(item => item.lang === currentLang);
+
+    // Cập nhật tagMap dự phòng ngay trong hàm để hiển thị đẹp
+    const fallbackTagMap = currentLang === 'vi' 
+        ? { "Crypto": "Tiền Số", "Finance": "Tài Chính", "Gold & Metals": "Vàng & Đầu Tư", "Real Estate": "Bất Động Sản" }
+        : { "Crypto": "Crypto", "Finance": "Finance", "Gold & Metals": "Gold & Metals", "Real Estate": "Real Estate" };
+
+    filteredNews.forEach(item => {
+        // Dịch nhãn danh mục
+        const displayTag = fallbackTagMap[item.category] || item.category;
+        
         const div = document.createElement('div');
         div.className = 'news-card';
         div.innerHTML = `

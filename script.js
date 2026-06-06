@@ -1,7 +1,7 @@
 const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxyoTACI2-r7SBG5X1_-r_luqq0SsdnFwugEeLhkXzdIy4Ib4BjjJ57GW1jMsgnwgAUgA/exec';
 
 // =========================================================================
-// 1. TỪ ĐIỂN DỊCH THUẬT (Đã cập nhật tỷ lệ hiển thị VND và USD)
+// 1. TỪ ĐIỂN DỊCH THUẬT 
 // =========================================================================
 const dictionary = {
     vi: {
@@ -38,17 +38,58 @@ const dictionary = {
     }
 };
 
-// Mặc định hiển thị tiếng Anh (en) như cấu hình chương trước
 let currentLang = localStorage.getItem('siteLang') || 'en';
 let masterData = { trading: [], news: [] }; 
+let currentExchangeRate = 25400; // Tỷ giá mặc định (chạy dự phòng nếu API lỗi)
+let isFirstLoad = true; // Cờ kiểm tra lần đầu tải trang
 
 // =========================================================================
-// 2. HÀM ĐỔI NGÔN NGỮ VÀ ĐIỀU CHỈNH Ô NHẬP LIỆU (VND / USD)
+// 2. GỌI API TỶ GIÁ TỰ ĐỘNG THỜI GIAN THỰC
 // =========================================================================
+async function fetchExchangeRate() {
+    try {
+        const res = await fetch('https://open.er-api.com/v6/latest/USD');
+        const data = await res.json();
+        if (data && data.rates && data.rates.VND) {
+            currentExchangeRate = data.rates.VND;
+        }
+    } catch (e) {
+        console.error('Lỗi API cập nhật tỷ giá:', e);
+    }
+}
+
+// =========================================================================
+// 3. HÀM CHUYỂN ĐỔI NGÔN NGỮ KÈM TÍNH TOÁN QUY ĐỔI TIỀN TỆ
+// =========================================================================
+function setLanguage(lang) {
+    if (lang === currentLang) return; // Nếu bấm lại ngôn ngữ đang dùng thì bỏ qua
+
+    // Lấy con số đang hiển thị trên màn hình hiện tại
+    let investInput = document.getElementById('invest-amount');
+    let incomeInput = document.getElementById('annual-income');
+    let investVal = parseFloat(investInput.value) || 0;
+    let incomeVal = parseFloat(incomeInput.value) || 0;
+
+    // Chuyển đổi toán học dựa trên API tỷ giá
+    if (lang === 'en' && currentLang === 'vi') {
+        // Từ VND sang USD (Chia cho tỷ giá)
+        investInput.value = Math.round(investVal / currentExchangeRate);
+        incomeInput.value = Math.round(incomeVal / currentExchangeRate);
+    } else if (lang === 'vi' && currentLang === 'en') {
+        // Từ USD sang VND (Nhân với tỷ giá)
+        investInput.value = Math.round(investVal * currentExchangeRate);
+        incomeInput.value = Math.round(incomeVal * currentExchangeRate);
+    }
+
+    currentLang = lang;
+    localStorage.setItem('siteLang', lang);
+    applyLanguage();
+}
+
 function applyLanguage() {
     const lang = dictionary[currentLang];
     
-    // Dịch toàn bộ giao diện chữ tĩnh
+    // Dịch các nhãn văn bản
     document.getElementById('nav-crypto').innerText = lang.navCrypto;
     document.getElementById('nav-gold').innerText = lang.navGold;
     document.getElementById('nav-calc').innerText = lang.navCalc;
@@ -90,28 +131,25 @@ function applyLanguage() {
     document.getElementById('btn-lang-en').classList.remove('active');
     document.getElementById(`btn-lang-${currentLang}`).classList.add('active');
 
-    // TỰ ĐỘNG ĐỔI GIÁ TRỊ GỢI Ý TRONG Ô INPUT PHÙ HỢP VỚI ĐỒNG TIỀN
-    if (currentLang === 'en') {
-        document.getElementById('invest-amount').value = "100000"; // $100,000 USD
-        document.getElementById('annual-income').value = "8000";   // $8,000 USD
-    } else {
-        document.getElementById('invest-amount').value = "2000000000"; // 2 Tỷ VND
-        document.getElementById('annual-income').value = "120000000";  // 120 Triệu VND
+    // Chỉ điền số mặc định khi mở web lần đầu
+    if (isFirstLoad) {
+        if (currentLang === 'en') {
+            document.getElementById('invest-amount').value = "100000";
+            document.getElementById('annual-income').value = "8000";
+        } else {
+            document.getElementById('invest-amount').value = "2000000000";
+            document.getElementById('annual-income').value = "120000000";
+        }
+        isFirstLoad = false;
     }
 
     renderTradingTable();
     renderNewsFeed();
-    calculateROI(); // Kích hoạt tính toán lại theo đồng tiền mới
-}
-
-function setLanguage(lang) {
-    currentLang = lang;
-    localStorage.setItem('siteLang', lang);
-    applyLanguage();
+    calculateROI();
 }
 
 // =========================================================================
-// 3. MÁY TÍNH HIỆU SUẤT ĐẦU TƯ ĐA TIỀN TỆ (ĐA NGÔN NGỮ)
+// 4. MÁY TÍNH HIỆU SUẤT ĐẦU TƯ
 // =========================================================================
 function calculateROI() {
     const investAmount = parseFloat(document.getElementById('invest-amount').value);
@@ -120,27 +158,23 @@ function calculateROI() {
 
     if (isNaN(investAmount) || isNaN(annualIncome) || investAmount <= 0) return;
 
-    // 1. Tính tỷ suất dòng tiền
     const roi = (annualIncome / investAmount) * 100;
     document.getElementById('res-roi').innerText = roi.toFixed(2) + "% " + (currentLang === 'vi' ? "/ năm" : "/ year");
 
-    // 2. Tính giá trị tài sản tương lai sau 3 năm
     const futureValue = investAmount * Math.pow((1 + growthRate), 3);
     
-    // ĐIỀU CHỈNH HIỂN THỊ ĐỊNH DẠNG USD HOẶC VND THEO NGÔN NGỮ
     if (currentLang === 'vi') {
         document.getElementById('res-future').innerText = Math.round(futureValue).toLocaleString() + " VND";
     } else {
         document.getElementById('res-future').innerText = "$" + Math.round(futureValue).toLocaleString() + " USD";
     }
 
-    // 3. Tính thời gian hoàn vốn
     const period = investAmount / annualIncome;
     document.getElementById('res-period').innerText = period.toFixed(1) + " " + dictionary[currentLang].unitYear;
 }
 
 // =========================================================================
-// 4. CÁC HÀM XỬ LÝ DỮ LIỆU ĐỘNG CRYPTO & TIN TỨC (Giữ nguyên cấu trúc cũ)
+// 5. CÁC HÀM XỬ LÝ DỮ LIỆU ĐỘNG CRYPTO & TIN TỨC 
 // =========================================================================
 function renderTradingTable() {
     const tableBody = document.getElementById('data-body');
@@ -203,7 +237,9 @@ async function fetchMasterData() {
     }
 }
 
-// KHỞI ĐỘNG HỆ THỐNG
-applyLanguage();
-fetchMasterData();
+// KHỞI ĐỘNG HỆ THỐNG ĐỒNG BỘ: LẤY TỶ GIÁ -> SAU ĐÓ MỚI RENDER GIAO DIỆN
+fetchExchangeRate().then(() => {
+    applyLanguage();
+    fetchMasterData();
+});
 setInterval(fetchMasterData, 60000);

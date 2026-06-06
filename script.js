@@ -1,7 +1,8 @@
+// 1. ĐIỀN LINK WEB APP GOOGLE SHEETS CỦA BẠN VÀO ĐÂY
 const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzTvvEHdZVD4un5B3-FoelJbmXPVw7o4rrcfTY4nEr1HoIStI9oZqGQgC2gGoxjflqe9A/exec';
 
 // =========================================================================
-// 1. TỪ ĐIỂN DỊCH THUẬT 
+// 2. TỪ ĐIỂN DỊCH THUẬT GIAO DIỆN & TỪ KHÓA
 // =========================================================================
 const dictionary = {
     vi: {
@@ -16,7 +17,7 @@ const dictionary = {
         titleCalcRes: "Kết Quả Phân Tích Dòng Tiền:", labelRes1: "Tỷ suất lợi nhuận dòng tiền:", labelRes2: "Dự kiến giá trị tài sản sau 3 năm:", labelRes3: "Thời gian hoàn vốn ròng:",
         titleAff: "Bắt đầu hành trình đầu tư của bạn với các nền tảng uy tín:", btnAffCrypto: "Mở Tài Khoản Giao Dịch Crypto", btnAffGold: "Đăng Ký Sàn Giao Dịch Vàng",
         fPrivacy: "Chính Sách Bảo Mật (Privacy Policy)", fTerms: "Điều Khoản Sử Dụng", fContact: "Liên Hệ Hợp Tác", unitYear: "năm",
-        tagMap: { "Crypto": "Tiền Số", "Finance": "Tài Chính", "Gold & Metals": "Vàng & Hàng Hóa" },
+        tagMap: { "Crypto": "Tiền Số", "Finance": "Tài Chính", "Gold & Metals": "Vàng & Đầu Tư", "Real Estate": "Bất Động Sản" },
         dataMap: { "Mua": "Buy", "Bán": "Sell", "Theo dõi": "Watch", "Cắt lên (Tăng)": "Cross Up (Bullish)", "Cắt xuống (Giảm)": "Cross Down (Bearish)", "FVG Tăng / CHoCH": "Bullish FVG / CHoCH" },
         articles: `<div class="article"><h3>1. Hệ thống tín hiệu toán học cố định (Rule-Based Trading) là gì?</h3><p>Hệ thống hoạt động hoàn toàn dựa trên các quy tắc toán học khắt khe và các chỉ báo kỹ thuật có sẵn, loại bỏ hoàn toàn yếu tố cảm xúc nhiễu của con người.</p></div>`
     },
@@ -32,7 +33,7 @@ const dictionary = {
         titleCalcRes: "Cash Flow Analysis Results:", labelRes1: "Cash Flow Yield Rate:", labelRes2: "Projected Asset Value (3 Years):", labelRes3: "Net Payback Period:",
         titleAff: "Start your investment journey with trusted platforms:", btnAffCrypto: "Open Crypto Trading Account", btnAffGold: "Register Gold Trading Account",
         fPrivacy: "Privacy Policy", fTerms: "Terms of Service", fContact: "Contact Partnership", unitYear: "years",
-        tagMap: { "Crypto": "Crypto", "Finance": "Finance", "Gold & Metals": "Gold & Metals" },
+        tagMap: { "Crypto": "Crypto", "Finance": "Finance", "Gold & Metals": "Gold & Metals", "Real Estate": "Real Estate" },
         dataMap: { "Mua": "Buy", "Bán": "Sell", "Theo dõi": "Watch", "Cắt lên (Tăng)": "Cross Up (Bullish)", "Cắt xuống (Giảm)": "Cross Down (Bearish)", "FVG Tăng / CHoCH": "Bullish FVG / CHoCH" },
         articles: `<div class="article"><h3>1. What is Rule-Based Trading?</h3><p>The system operates strictly on explicit mathematical rules and mechanical technical indicators, completely eliminating human emotional bias.</p></div>`
     }
@@ -40,11 +41,11 @@ const dictionary = {
 
 let currentLang = localStorage.getItem('siteLang') || 'en';
 let masterData = { trading: [], news: [] }; 
-let currentExchangeRate = 25400; // Tỷ giá mặc định (chạy dự phòng nếu API lỗi)
-let isFirstLoad = true; // Cờ kiểm tra lần đầu tải trang
+let currentExchangeRate = 25400; // Tỷ giá dự phòng
+let isFirstLoad = true;
 
 // =========================================================================
-// 2. GỌI API TỶ GIÁ TỰ ĐỘNG THỜI GIAN THỰC
+// 3. API TỶ GIÁ THỜI GIAN THỰC (USD/VND)
 // =========================================================================
 async function fetchExchangeRate() {
     try {
@@ -59,24 +60,20 @@ async function fetchExchangeRate() {
 }
 
 // =========================================================================
-// 3. HÀM CHUYỂN ĐỔI NGÔN NGỮ KÈM TÍNH TOÁN QUY ĐỔI TIỀN TỆ
+// 4. CHUYỂN ĐỔI NGÔN NGỮ & TIỀN TỆ MÁY TÍNH
 // =========================================================================
 function setLanguage(lang) {
-    if (lang === currentLang) return; // Nếu bấm lại ngôn ngữ đang dùng thì bỏ qua
+    if (lang === currentLang) return;
 
-    // Lấy con số đang hiển thị trên màn hình hiện tại
     let investInput = document.getElementById('invest-amount');
     let incomeInput = document.getElementById('annual-income');
     let investVal = parseFloat(investInput.value) || 0;
     let incomeVal = parseFloat(incomeInput.value) || 0;
 
-    // Chuyển đổi toán học dựa trên API tỷ giá
     if (lang === 'en' && currentLang === 'vi') {
-        // Từ VND sang USD (Chia cho tỷ giá)
         investInput.value = Math.round(investVal / currentExchangeRate);
         incomeInput.value = Math.round(incomeVal / currentExchangeRate);
     } else if (lang === 'vi' && currentLang === 'en') {
-        // Từ USD sang VND (Nhân với tỷ giá)
         investInput.value = Math.round(investVal * currentExchangeRate);
         incomeInput.value = Math.round(incomeVal * currentExchangeRate);
     }
@@ -89,7 +86,6 @@ function setLanguage(lang) {
 function applyLanguage() {
     const lang = dictionary[currentLang];
     
-    // Dịch các nhãn văn bản
     document.getElementById('nav-crypto').innerText = lang.navCrypto;
     document.getElementById('nav-gold').innerText = lang.navGold;
     document.getElementById('nav-calc').innerText = lang.navCalc;
@@ -131,7 +127,6 @@ function applyLanguage() {
     document.getElementById('btn-lang-en').classList.remove('active');
     document.getElementById(`btn-lang-${currentLang}`).classList.add('active');
 
-    // Chỉ điền số mặc định khi mở web lần đầu
     if (isFirstLoad) {
         if (currentLang === 'en') {
             document.getElementById('invest-amount').value = "100000";
@@ -149,7 +144,7 @@ function applyLanguage() {
 }
 
 // =========================================================================
-// 4. MÁY TÍNH HIỆU SUẤT ĐẦU TƯ
+// 5. MÁY TÍNH HIỆU SUẤT ĐẦU TƯ BĐS
 // =========================================================================
 function calculateROI() {
     const investAmount = parseFloat(document.getElementById('invest-amount').value);
@@ -174,7 +169,7 @@ function calculateROI() {
 }
 
 // =========================================================================
-// 5. CÁC HÀM XỬ LÝ DỮ LIỆU ĐỘNG CRYPTO & TIN TỨC 
+// 6. RENDER GIAO DIỆN (CRYPTO & TIN TỨC)
 // =========================================================================
 function renderTradingTable() {
     const tableBody = document.getElementById('data-body');
@@ -207,19 +202,13 @@ function renderNewsFeed() {
     const newsContainer = document.getElementById('news-container');
     if (!masterData.news || masterData.news.length === 0) return;
     newsContainer.innerHTML = '';
-    const lang = dictionary[currentLang];
-
-    // LỌC TIN TỨC: Chỉ lấy các bản tin có nhãn ngôn ngữ (en/vi) khớp với ngôn ngữ đang chọn
+    
+    // Bộ lọc thông minh: Lọc tin tức theo ngôn ngữ hiện tại của web
     const filteredNews = masterData.news.filter(item => item.lang === currentLang);
-
-    // Cập nhật tagMap dự phòng ngay trong hàm để hiển thị đẹp
-    const fallbackTagMap = currentLang === 'vi' 
-        ? { "Crypto": "Tiền Số", "Finance": "Tài Chính", "Gold & Metals": "Vàng & Đầu Tư", "Real Estate": "Bất Động Sản" }
-        : { "Crypto": "Crypto", "Finance": "Finance", "Gold & Metals": "Gold & Metals", "Real Estate": "Real Estate" };
+    const langMap = dictionary[currentLang].tagMap;
 
     filteredNews.forEach(item => {
-        // Dịch nhãn danh mục
-        const displayTag = fallbackTagMap[item.category] || item.category;
+        const displayTag = langMap[item.category] || item.category;
         
         const div = document.createElement('div');
         div.className = 'news-card';
@@ -243,13 +232,52 @@ async function fetchMasterData() {
         renderTradingTable();
         renderNewsFeed();
     } catch (error) {
-        console.error('Lỗi nạp dữ liệu hệ thống:', error);
+        console.error('Lỗi nạp dữ liệu hệ thống Crypto & Tin tức:', error);
     }
 }
 
-// KHỞI ĐỘNG HỆ THỐNG ĐỒNG BỘ: LẤY TỶ GIÁ -> SAU ĐÓ MỚI RENDER GIAO DIỆN
+// =========================================================================
+// 7. API GIÁ VÀNG & BẠC (GOLDAPI.IO)
+// =========================================================================
+async function fetchMetalsData() {
+    try {
+        const myHeaders = new Headers();
+        // Điền API Key của GoldAPI.io vào dòng dưới đây
+        myHeaders.append("x-access-token", "goldapi-fg1fa19mo2uhtas-io"); 
+
+        const requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+
+        const resGold = await fetch("https://www.goldapi.io/api/XAU/USD", requestOptions);
+        if (resGold.ok) {
+            const dataGold = await resGold.json();
+            document.getElementById('gold-world').innerText = "$" + dataGold.price.toLocaleString() + " / oz";
+        }
+
+        const resSilver = await fetch("https://www.goldapi.io/api/XAG/USD", requestOptions);
+        if (resSilver.ok) {
+            const dataSilver = await resSilver.json();
+            document.getElementById('silver-world').innerText = "$" + dataSilver.price.toLocaleString() + " / oz";
+        }
+    } catch (error) {
+        console.error('Lỗi tải API giá kim loại:', error);
+        document.getElementById('gold-world').innerText = "Tạm ngắt kết nối";
+        document.getElementById('silver-world').innerText = "Tạm ngắt kết nối";
+    }
+}
+
+// =========================================================================
+// 8. KHỞI CHẠY HỆ THỐNG ĐỒNG BỘ
+// =========================================================================
 fetchExchangeRate().then(() => {
     applyLanguage();
     fetchMasterData();
+    fetchMetalsData();
 });
-setInterval(fetchMasterData, 60000);
+
+// Tự động làm mới dữ liệu mà không cần tải lại trang
+setInterval(fetchMasterData, 60000); // 1 phút / lần cho Crypto và Tin Tức
+setInterval(fetchMetalsData, 60000); // 1 phút / lần cho Vàng và Bạc

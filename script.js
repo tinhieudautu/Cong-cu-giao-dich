@@ -1,4 +1,4 @@
-const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxyoTACI2-r7SBG5X1_-r_luqq0SsdnFwugEeLhkXzdIy4Ib4BjjJ57GW1jMsgnwgAUgA/exec';
+const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzTvvEHdZVD4un5B3-FoelJbmXPVw7o4rrcfTY4nEr1HoIStI9oZqGQgC2gGoxjflqe9A/exec';
 
 // =========================================================================
 // 1. TỪ ĐIỂN DỊCH THUẬT 

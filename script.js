@@ -186,13 +186,15 @@ function renderTradingTable() {
         tr.innerHTML = `
             <td><strong>${row.asset}</strong></td>
             <td>${parseFloat(row.price).toLocaleString()} USD</td>
+            
+            <td style="color: ${row.signal === 'Mua' ? '#02c076' : (row.signal === 'Bán' ? '#f44336' : '#eaecef')}">
+                <strong>${transSignal}</strong>
+            </td>
+            
             <td>${transMacd}</td>
             <td>${row.stochRsi}</td>
             <td>${row.atr}</td>
             <td>${transStruct}</td>
-            <td style="color: ${row.signal === 'Mua' ? '#02c076' : (row.signal === 'Bán' ? '#f44336' : '#eaecef')}">
-                <strong>${transSignal}</strong>
-            </td>
         `;
         tableBody.appendChild(tr);
     });

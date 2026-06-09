@@ -433,7 +433,7 @@ footer a:hover {
     .news-grid { grid-template-columns: 1fr; }
 }
 
-/* TỐI ƯU UX: HIỆU ỨNG TOOLTIP CHÚ THÍCH KỸ THUẬT */
+/* TỐI ƯU UX: HIỆU ỨNG TOOLTIP CHÚ THÍCH KỸ THUẬT (BẢN SỬA LỖI BỊ CHE) */
 .tooltip-icon {
     display: inline-flex;
     align-items: center;
@@ -457,11 +457,11 @@ footer a:hover {
     background-color: #f0b90b;
 }
 
-/* Khung nội dung giải thích */
+/* Khung nội dung giải thích (Đảo ngược hướng hiển thị thả xuống dưới) */
 .tooltip-icon::after {
     content: attr(data-tooltip);
     position: absolute;
-    bottom: 160%;
+    top: 180%; /* Nổi xuống phía dưới icon */
     left: 50%;
     transform: translateX(-50%);
     background-color: #2b3139;
@@ -477,34 +477,39 @@ footer a:hover {
     opacity: 0;
     visibility: hidden;
     transition: all 0.2s ease;
-    z-index: 100;
+    z-index: 9999; /* Đẩy lên lớp cao nhất để không bị bảng đè lên */
     text-align: left;
     line-height: 1.5;
     box-shadow: 0 5px 15px rgba(0,0,0,0.6);
 }
 
-/* Mũi tên chỉ xuống của hộp giải thích */
+/* Mũi tên chỉ LÊN của hộp giải thích */
 .tooltip-icon::before {
     content: "";
     position: absolute;
-    bottom: 100%;
+    top: 100%; /* Đặt mũi tên ở phía dưới icon */
     left: 50%;
     transform: translateX(-50%);
     border-width: 6px;
     border-style: solid;
-    border-color: #2b3139 transparent transparent transparent;
+    border-color: transparent transparent #2b3139 transparent; /* Vẽ mũi tên hướng lên */
     opacity: 0;
     visibility: hidden;
     transition: all 0.2s ease;
+    z-index: 9999;
 }
 
-/* Hiệu ứng nổi lên khi di chuột (Hover) */
+/* Hiệu ứng trượt xuống khi di chuột (Hover) */
 .tooltip-icon:hover::after,
 .tooltip-icon:hover::before {
     opacity: 1;
     visibility: visible;
-    bottom: 140%; /* Trượt nhẹ lên trên */
 }
+
+.tooltip-icon:hover::after {
+    top: 160%; /* Trượt nhẹ xuống để tạo cảm giác mượt mà */
+}
+
 .tooltip-icon:hover::before {
-    bottom: calc(140% - 11px);
+    top: calc(160% - 11px);
 }

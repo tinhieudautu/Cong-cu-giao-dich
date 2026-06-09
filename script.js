@@ -259,7 +259,7 @@ async function fetchMetalsData() {
     try {
         const myHeaders = new Headers();
         // Điền API Key của GoldAPI.io vào dòng dưới đây
-        myHeaders.append("x-access-token", "YOUR_API_KEY_CỦA_BẠN_ĐIỀN_VÀO_ĐÂY"); 
+        myHeaders.append("x-access-token", "goldapi-fg1fa19mo2uhtas-io"); 
 
         const requestOptions = {
             method: 'GET',

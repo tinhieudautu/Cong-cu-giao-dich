@@ -2,17 +2,20 @@
 const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzTvvEHdZVD4un5B3-FoelJbmXPVw7o4rrcfTY4nEr1HoIStI9oZqGQgC2gGoxjflqe9A/exec';
 
 // =========================================================================
-// 2. TỪ ĐIỂN DỊCH THUẬT (ĐÃ BỔ SUNG TOOLTIP HTML)
+// 2. TỪ ĐIỂN DỊCH THUẬT (ĐẠ ĐÃ TÍCH HỢP ĐỘNG TIÊU ĐỀ & META DESCRIPTION)
 // =========================================================================
 const dictionary = {
     vi: {
+        // Cấu hình SEO Tiếng Việt
+        pageTitle: "FINtechDATA - Hệ Thống Tiện Ích & Dữ Liệu Đầu Tư Tự Động",
+        metaDesc: "Truy cập phân tích kỹ thuật crypto nâng cao (MACD, Stoch RSI), theo dõi giá vàng & bạc thời gian thực, và máy tính tài chính đa tiền tệ tính ROI, hoàn vốn, lãi kép. Dữ liệu đầu tư rule-based cho nhà giao dịch.",
+        
         navCrypto: "Thị Trường Crypto", navGold: "Giá Vàng & Kim Loại", navCalc: "Máy Tính Đầu Tư", navKnowledge: "Cẩm Nang Kiến Thức",
         heroTitle: "Hệ Thống Tiện Ích & Dữ Liệu Đầu Tư Phân Tích Tự Động", heroDesc: "Cập nhật chỉ số thời gian thực • Công cụ tính toán hiệu suất dòng tiền • Phân tích hệ thống Rule-Based",
         titleCrypto: "📊 Dữ Liệu Chỉ Báo Crypto (Thời Gian Thực)", titleGold: "🏆 Tra Cứu Giá Vàng & Kim Loại Quý", titleCalc: "🧮 Máy Tính Hiệu Suất Đầu Tư Bất Động Sản & Dòng Tiền",
         titleKnowledge: "📚 Cẩm Nang Phân Tích Kỹ Thuật & Tối Ưu Hóa Vốn Đầu Tư", textLoading: "Đang kết nối API cơ sở dữ liệu...",
         thAsset: "Tài Sản", thPrice: "Giá Hiện Tại", thSignal: "Tín Hiệu Hệ Thống",
         
-        // CÁC CHỈ BÁO KÈM TOOLTIP TIẾNG VIỆT
         thMacd: 'MACD <span class="tooltip-icon" data-tooltip="Xác định xu hướng chính. Cắt lên = Xu hướng Tăng, Cắt xuống = Xu hướng Giảm.">i</span>',
         thStoch: 'Stoch RSI <span class="tooltip-icon" data-tooltip="Đo sức mạnh giá. Dưới 20 là vùng Quá bán (Sắp tăng), Trên 80 là vùng Quá mua (Sắp giảm).">i</span>',
         thAtr: 'Chỉ số ATR <span class="tooltip-icon" data-tooltip="Đo lường mức độ biến động giá. Hỗ trợ đặt mức Cắt lỗ (Stop Loss) an toàn để tránh bị quét râu nến.">i</span>',
@@ -29,13 +32,16 @@ const dictionary = {
         articles: `<div class="article"><h3>1. Hệ thống tín hiệu toán học cố định (Rule-Based Trading) là gì?</h3><p>Hệ thống hoạt động hoàn toàn dựa trên các quy tắc toán học khắt khe và các chỉ báo kỹ thuật có sẵn, loại bỏ hoàn toàn yếu tố cảm xúc nhiễu của con người.</p></div>`
     },
     en: {
+        // Cấu hình SEO Tiếng Anh
+        pageTitle: "Real-time Crypto Signals | Gold Silver Price Tracker | Financial Calculator",
+        metaDesc: "Access advanced crypto technical analysis (MACD, Stoch RSI), real-time gold & silver prices, and a multi-currency financial calculator for ROI, payback, and compound interest. Rule-based investment data for global traders.",
+        
         navCrypto: "Crypto Market", navGold: "Gold & Metals", navCalc: "Investment Calculator", navKnowledge: "Knowledge Base",
         heroTitle: "Automated Investment Utility & Data Analytics System", heroDesc: "Real-time index updates • Cash flow performance tools • Rule-Based analytics system",
         titleCrypto: "📊 Crypto Indicator Data (Real-Time)", titleGold: "🏆 Gold & Precious Metals Lookup", titleCalc: "🧮 Real Estate & Cash Flow Performance Calculator",
         titleKnowledge: "📚 Technical Analysis & Capital Optimization Guide", textLoading: "Connecting to database API...",
         thAsset: "Asset", thPrice: "Current Price", thSignal: "System Signal",
         
-        // CÁC CHỈ BÁO KÈM TOOLTIP TIẾNG ANH
         thMacd: 'MACD <span class="tooltip-icon" data-tooltip="Determines primary trend. Cross Up = Bullish momentum, Cross Down = Bearish momentum.">i</span>',
         thStoch: 'Stoch RSI <span class="tooltip-icon" data-tooltip="Momentum strength. Below 20 is Oversold (Buy signal), Above 80 is Overbought (Sell signal).">i</span>',
         thAtr: 'ATR Index <span class="tooltip-icon" data-tooltip="Measures price volatility. Used to set safe Stop Loss (SL) levels avoiding market noise.">i</span>',
@@ -100,6 +106,16 @@ function setLanguage(lang) {
 function applyLanguage() {
     const lang = dictionary[currentLang];
     
+    // ĐỘNG: Cập nhật Tiêu đề trang (Tab Browser) theo ngôn ngữ
+    document.title = lang.pageTitle;
+
+    // ĐỘNG: Cập nhật thẻ Mô tả Meta (Meta Description) để phục vụ SEO Google
+    const metaDescriptionTag = document.querySelector('meta[name="description"]');
+    if (metaDescriptionTag) {
+        metaDescriptionTag.setAttribute('content', lang.metaDesc);
+    }
+    
+    // Dịch giao diện tĩnh
     document.getElementById('nav-crypto').innerText = lang.navCrypto;
     document.getElementById('nav-gold').innerText = lang.navGold;
     document.getElementById('nav-calc').innerText = lang.navCalc;
@@ -115,7 +131,6 @@ function applyLanguage() {
     document.getElementById('th-price').innerText = lang.thPrice;
     document.getElementById('th-signal').innerText = lang.thSignal;
     
-    // Sử dụng innerHTML để hiển thị thẻ Tooltip HTML
     document.getElementById('th-macd').innerHTML = lang.thMacd;
     document.getElementById('th-stoch').innerHTML = lang.thStoch;
     document.getElementById('th-atr').innerHTML = lang.thAtr;
@@ -258,7 +273,6 @@ async function fetchMasterData() {
 async function fetchMetalsData() {
     try {
         const myHeaders = new Headers();
-        // Điền API Key của GoldAPI.io vào dòng dưới đây
         myHeaders.append("x-access-token", "goldapi-fg1fa19mo2uhtas-io"); 
 
         const requestOptions = {

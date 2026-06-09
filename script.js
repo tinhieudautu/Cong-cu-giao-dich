@@ -2,7 +2,7 @@
 const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzTvvEHdZVD4un5B3-FoelJbmXPVw7o4rrcfTY4nEr1HoIStI9oZqGQgC2gGoxjflqe9A/exec';
 
 // =========================================================================
-// 2. TỪ ĐIỂN DỊCH THUẬT GIAO DIỆN & TỪ KHÓA
+// 2. TỪ ĐIỂN DỊCH THUẬT (ĐÃ BỔ SUNG TOOLTIP HTML)
 // =========================================================================
 const dictionary = {
     vi: {
@@ -10,7 +10,14 @@ const dictionary = {
         heroTitle: "Hệ Thống Tiện Ích & Dữ Liệu Đầu Tư Phân Tích Tự Động", heroDesc: "Cập nhật chỉ số thời gian thực • Công cụ tính toán hiệu suất dòng tiền • Phân tích hệ thống Rule-Based",
         titleCrypto: "📊 Dữ Liệu Chỉ Báo Crypto (Thời Gian Thực)", titleGold: "🏆 Tra Cứu Giá Vàng & Kim Loại Quý", titleCalc: "🧮 Máy Tính Hiệu Suất Đầu Tư Bất Động Sản & Dòng Tiền",
         titleKnowledge: "📚 Cẩm Nang Phân Tích Kỹ Thuật & Tối Ưu Hóa Vốn Đầu Tư", textLoading: "Đang kết nối API cơ sở dữ liệu...",
-        thAsset: "Tài Sản", thPrice: "Giá Hiện Tại", thMacd: "MACD", thStoch: "Stoch RSI", thAtr: "Chỉ số ATR", thStruct: "Cấu Trúc Thị Trường", thSignal: "Tín Hiệu Hệ Thống",
+        thAsset: "Tài Sản", thPrice: "Giá Hiện Tại", thSignal: "Tín Hiệu Hệ Thống",
+        
+        // CÁC CHỈ BÁO KÈM TOOLTIP TIẾNG VIỆT
+        thMacd: 'MACD <span class="tooltip-icon" data-tooltip="Xác định xu hướng chính. Cắt lên = Xu hướng Tăng, Cắt xuống = Xu hướng Giảm.">i</span>',
+        thStoch: 'Stoch RSI <span class="tooltip-icon" data-tooltip="Đo sức mạnh giá. Dưới 20 là vùng Quá bán (Sắp tăng), Trên 80 là vùng Quá mua (Sắp giảm).">i</span>',
+        thAtr: 'Chỉ số ATR <span class="tooltip-icon" data-tooltip="Đo lường mức độ biến động giá. Hỗ trợ đặt mức Cắt lỗ (Stop Loss) an toàn để tránh bị quét râu nến.">i</span>',
+        thStruct: 'Cấu Trúc Thị Trường <span class="tooltip-icon" data-tooltip="Phân tích hành vi giá. FVG (Vùng mất cân bằng) giúp định vị dòng tiền lớn (Cá mập) đang gom hàng.">i</span>',
+        
         labelGold: "Vàng Thế Giới (XAU/USD)", labelSilver: "Bạc Thế Giới (XAG/USD)", titleNews: "📰 Tin Tức Tài Chính Toàn Cầu",
         calcDesc: "Nhập thông số dự án hoặc bất động sản (đất nền, chung cư) để hệ thống tự động tính toán tỷ suất sinh lời ROI và chu kỳ hoàn vốn.",
         labelIn1: "Vốn đầu tư ban đầu (VND):", labelIn2: "Thu nhập ròng từ sản phẩm hàng năm (VND):", labelIn3: "Tốc độ tăng giá trị tài sản kỳ vọng (%/năm):", btnCalcAction: "Kích Hoạt Tính Toán",
@@ -26,7 +33,14 @@ const dictionary = {
         heroTitle: "Automated Investment Utility & Data Analytics System", heroDesc: "Real-time index updates • Cash flow performance tools • Rule-Based analytics system",
         titleCrypto: "📊 Crypto Indicator Data (Real-Time)", titleGold: "🏆 Gold & Precious Metals Lookup", titleCalc: "🧮 Real Estate & Cash Flow Performance Calculator",
         titleKnowledge: "📚 Technical Analysis & Capital Optimization Guide", textLoading: "Connecting to database API...",
-        thAsset: "Asset", thPrice: "Current Price", thMacd: "MACD", thStoch: "Stoch RSI", thAtr: "ATR Index", thStruct: "Market Structure", thSignal: "System Signal",
+        thAsset: "Asset", thPrice: "Current Price", thSignal: "System Signal",
+        
+        // CÁC CHỈ BÁO KÈM TOOLTIP TIẾNG ANH
+        thMacd: 'MACD <span class="tooltip-icon" data-tooltip="Determines primary trend. Cross Up = Bullish momentum, Cross Down = Bearish momentum.">i</span>',
+        thStoch: 'Stoch RSI <span class="tooltip-icon" data-tooltip="Momentum strength. Below 20 is Oversold (Buy signal), Above 80 is Overbought (Sell signal).">i</span>',
+        thAtr: 'ATR Index <span class="tooltip-icon" data-tooltip="Measures price volatility. Used to set safe Stop Loss (SL) levels avoiding market noise.">i</span>',
+        thStruct: 'Market Structure <span class="tooltip-icon" data-tooltip="Price Action analysis. FVG (Fair Value Gap) identifies institutional liquidity imbalances.">i</span>',
+        
         labelGold: "Gold Spot (XAU/USD)", labelSilver: "Silver Spot (XAG/USD)", titleNews: "📰 Global Financial News Feed",
         calcDesc: "Enter project or real estate metrics (land plots, apartments) to automatically calculate ROI and payback period.",
         labelIn1: "Initial Investment Capital (USD):", labelIn2: "Annual Net Rental/Product Income (USD):", labelIn3: "Expected Asset Growth Rate (%/year):", btnCalcAction: "Trigger Calculations",
@@ -41,11 +55,11 @@ const dictionary = {
 
 let currentLang = localStorage.getItem('siteLang') || 'en';
 let masterData = { trading: [], news: [] }; 
-let currentExchangeRate = 25400; // Tỷ giá dự phòng
+let currentExchangeRate = 25400; 
 let isFirstLoad = true;
 
 // =========================================================================
-// 3. API TỶ GIÁ THỜI GIAN THỰC (USD/VND)
+// 3. API TỶ GIÁ THỜI GIAN THỰC
 // =========================================================================
 async function fetchExchangeRate() {
     try {
@@ -60,7 +74,7 @@ async function fetchExchangeRate() {
 }
 
 // =========================================================================
-// 4. CHUYỂN ĐỔI NGÔN NGỮ & TIỀN TỆ MÁY TÍNH
+// 4. ĐIỀU HƯỚNG GIAO DIỆN NGÔN NGỮ
 // =========================================================================
 function setLanguage(lang) {
     if (lang === currentLang) return;
@@ -99,11 +113,14 @@ function applyLanguage() {
     document.getElementById('title-knowledge').innerText = lang.titleKnowledge;
     document.getElementById('th-asset').innerText = lang.thAsset;
     document.getElementById('th-price').innerText = lang.thPrice;
-    document.getElementById('th-macd').innerText = lang.thMacd;
-    document.getElementById('th-stoch').innerText = lang.thStoch;
-    document.getElementById('th-atr').innerText = lang.thAtr;
-    document.getElementById('th-struct').innerText = lang.thStruct;
     document.getElementById('th-signal').innerText = lang.thSignal;
+    
+    // Sử dụng innerHTML để hiển thị thẻ Tooltip HTML
+    document.getElementById('th-macd').innerHTML = lang.thMacd;
+    document.getElementById('th-stoch').innerHTML = lang.thStoch;
+    document.getElementById('th-atr').innerHTML = lang.thAtr;
+    document.getElementById('th-struct').innerHTML = lang.thStruct;
+    
     document.getElementById('label-gold-world').innerText = lang.labelGold;
     document.getElementById('label-silver-world').innerText = lang.labelSilver;
     document.getElementById('calc-desc').innerText = lang.calcDesc;
@@ -144,7 +161,7 @@ function applyLanguage() {
 }
 
 // =========================================================================
-// 5. MÁY TÍNH HIỆU SUẤT ĐẦU TƯ BĐS
+// 5. MÁY TÍNH DÒNG TIỀN
 // =========================================================================
 function calculateROI() {
     const investAmount = parseFloat(document.getElementById('invest-amount').value);
@@ -169,7 +186,7 @@ function calculateROI() {
 }
 
 // =========================================================================
-// 6. RENDER GIAO DIỆN (CRYPTO & TIN TỨC)
+// 6. RENDER DỮ LIỆU ĐỘNG
 // =========================================================================
 function renderTradingTable() {
     const tableBody = document.getElementById('data-body');
@@ -186,11 +203,9 @@ function renderTradingTable() {
         tr.innerHTML = `
             <td><strong>${row.asset}</strong></td>
             <td>${parseFloat(row.price).toLocaleString()} USD</td>
-            
             <td style="color: ${row.signal === 'Mua' ? '#02c076' : (row.signal === 'Bán' ? '#f44336' : '#eaecef')}">
                 <strong>${transSignal}</strong>
             </td>
-            
             <td>${transMacd}</td>
             <td>${row.stochRsi}</td>
             <td>${row.atr}</td>
@@ -205,7 +220,6 @@ function renderNewsFeed() {
     if (!masterData.news || masterData.news.length === 0) return;
     newsContainer.innerHTML = '';
     
-    // Bộ lọc thông minh: Lọc tin tức theo ngôn ngữ hiện tại của web
     const filteredNews = masterData.news.filter(item => item.lang === currentLang);
     const langMap = dictionary[currentLang].tagMap;
 
@@ -239,13 +253,13 @@ async function fetchMasterData() {
 }
 
 // =========================================================================
-// 7. API GIÁ VÀNG & BẠC (GOLDAPI.IO)
+// 7. API GIÁ KIM LOẠI
 // =========================================================================
 async function fetchMetalsData() {
     try {
         const myHeaders = new Headers();
         // Điền API Key của GoldAPI.io vào dòng dưới đây
-        myHeaders.append("x-access-token", "goldapi-fg1fa19mo2uhtas-io"); 
+        myHeaders.append("x-access-token", "YOUR_API_KEY_CỦA_BẠN_ĐIỀN_VÀO_ĐÂY"); 
 
         const requestOptions = {
             method: 'GET',
@@ -266,8 +280,6 @@ async function fetchMetalsData() {
         }
     } catch (error) {
         console.error('Lỗi tải API giá kim loại:', error);
-        document.getElementById('gold-world').innerText = "Tạm ngắt kết nối";
-        document.getElementById('silver-world').innerText = "Tạm ngắt kết nối";
     }
 }
 
@@ -280,6 +292,5 @@ fetchExchangeRate().then(() => {
     fetchMetalsData();
 });
 
-// Tự động làm mới dữ liệu mà không cần tải lại trang
-setInterval(fetchMasterData, 60000); // 1 phút / lần cho Crypto và Tin Tức
-setInterval(fetchMetalsData, 60000); // 1 phút / lần cho Vàng và Bạc
+setInterval(fetchMasterData, 60000); 
+setInterval(fetchMetalsData, 60000);

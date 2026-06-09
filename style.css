@@ -432,3 +432,79 @@ footer a:hover {
 @media (max-width: 768px) {
     .news-grid { grid-template-columns: 1fr; }
 }
+
+/* TỐI ƯU UX: HIỆU ỨNG TOOLTIP CHÚ THÍCH KỸ THUẬT */
+.tooltip-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 6px;
+    color: #0b0e11;
+    background-color: #848e9c;
+    border-radius: 50%;
+    width: 14px;
+    height: 14px;
+    font-size: 10px;
+    font-weight: bold;
+    font-family: monospace;
+    cursor: help;
+    position: relative;
+    vertical-align: middle;
+    transition: 0.2s ease;
+}
+
+.tooltip-icon:hover {
+    background-color: #f0b90b;
+}
+
+/* Khung nội dung giải thích */
+.tooltip-icon::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 160%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #2b3139;
+    color: #eaecef;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: normal;
+    white-space: normal;
+    width: max-content;
+    max-width: 260px;
+    border: 1px solid #474d57;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease;
+    z-index: 100;
+    text-align: left;
+    line-height: 1.5;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.6);
+}
+
+/* Mũi tên chỉ xuống của hộp giải thích */
+.tooltip-icon::before {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 6px;
+    border-style: solid;
+    border-color: #2b3139 transparent transparent transparent;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease;
+}
+
+/* Hiệu ứng nổi lên khi di chuột (Hover) */
+.tooltip-icon:hover::after,
+.tooltip-icon:hover::before {
+    opacity: 1;
+    visibility: visible;
+    bottom: 140%; /* Trượt nhẹ lên trên */
+}
+.tooltip-icon:hover::before {
+    bottom: calc(140% - 11px);
+}

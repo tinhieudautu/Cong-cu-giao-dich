@@ -513,3 +513,26 @@ footer a:hover {
 .tooltip-icon:hover::before {
     top: calc(160% - 11px);
 }
+
+/* ========================================= */
+/* HIỆU ỨNG SKELETON LOADING (XƯƠNG TẢI TRANG) */
+/* ========================================= */
+@keyframes shimmer {
+    0% { background-position: -1000px 0; }
+    100% { background-position: 1000px 0; }
+}
+
+.skeleton {
+    background: #2b3139;
+    /* Tạo vệt sáng chạy ngang */
+    background-image: linear-gradient(90deg, #2b3139 0px, #3b424d 40px, #2b3139 80px);
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite linear;
+    border-radius: 4px;
+}
+
+/* Kích thước khung xương cho từng vị trí */
+.skeleton-text { height: 20px; width: 100%; margin: 2px auto; }
+.skeleton-price { height: 32px; width: 60%; margin: 0 auto; }
+.skeleton-title { height: 24px; width: 100%; margin-bottom: 10px; }
+.skeleton-meta { height: 16px; width: 35%; }

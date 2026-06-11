@@ -200,6 +200,7 @@ function applyLanguage() {
     renderTables();
     renderNewsFeed();
     calculateROI();
+    renderKnowledgeBase();
 }
 
 function calculateROI() {
@@ -294,12 +295,45 @@ function renderNewsFeed() {
     });
 }
 
+// Hàm tự động vẽ bài viết Kiến thức từ Google Sheets
+function renderKnowledgeBase() {
+    const knowledgeContainer = document.getElementById('knowledge-content');
+    // Nếu chưa load được dữ liệu thì bỏ qua
+    if (!masterData.knowledge || masterData.knowledge.length === 0) {
+        knowledgeContainer.innerHTML = '<p style="text-align:center; color:#848e9c;">Đang tải dữ liệu cẩm nang...</p>';
+        return;
+    }
+    
+    knowledgeContainer.innerHTML = '';
+    
+    // Chỉ lọc và hiển thị bài viết khớp với ngôn ngữ người dùng đang chọn (vi hoặc en)
+    const filteredKnowledge = masterData.knowledge.filter(item => item.lang === currentLang);
+    
+    if (filteredKnowledge.length === 0) {
+        knowledgeContainer.innerHTML = '<p style="text-align:center; color:#848e9c;">Chưa có bài viết nào cho ngôn ngữ này.</p>';
+        return;
+    }
+
+    // Tự động tạo mã HTML cho từng bài viết có trong Sheet
+    filteredKnowledge.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'knowledge-card';
+        div.innerHTML = `
+            <div class="knowledge-badge">${item.badge}</div>
+            <h3>${item.title}</h3>
+            <p>${item.content}</p>
+        `;
+        knowledgeContainer.appendChild(div);
+    });
+}
+
 async function fetchMasterData() {
     try {
         const response = await fetch(WEB_APP_URL);
         masterData = await response.json();
         renderTables();
         renderNewsFeed();
+        renderKnowledgeBase();
     } catch (error) { console.error('Lỗi nạp dữ liệu Master:', error); }
 }
 
@@ -308,3 +342,4 @@ fetchExchangeRate().then(() => {
     fetchMasterData();
 });
 setInterval(fetchMasterData, 60000);
+

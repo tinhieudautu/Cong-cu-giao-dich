@@ -1,5 +1,5 @@
 // 1. ĐIỀN LINK WEB APP GOOGLE SHEETS CỦA BẠN VÀO ĐÂY
-const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwH0sjhGkdbN9dOiTPdWNfdFSfvsHBRi2nZ7kchI_SJhpkCMHuUsPv-IdIsxufnkm-10w/exec';
+const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzad2-Zt9KmcaAmBPpzjtkBad0ZAWECCtb-wu2JSKm7kBN4KjpXH8dzP10BHv0ydo0Gpw/exec';
 
 // =========================================================================
 // 2. TỪ ĐIỂN DỊCH THUẬT GIAO DIỆN & TỐI ƯU HÓA TOOLTIP

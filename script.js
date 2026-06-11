@@ -1,8 +1,8 @@
 // 1. ĐIỀN LINK WEB APP GOOGLE SHEETS CỦA BẠN VÀO ĐÂY
-const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzad2-Zt9KmcaAmBPpzjtkBad0ZAWECCtb-wu2JSKm7kBN4KjpXH8dzP10BHv0ydo0Gpw/exec';
+const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyVbwDQMmmzRPtNucw28-A0COZGz6If4hJ8oIvBHWgVt1dMjqLTcEfPRsKIcPqdn31GOw/exec';
 
 // =========================================================================
-// 2. TỪ ĐIỂN DỊCH THUẬT GIAO DIỆN & TỐI ƯU HÓA TOOLTIP
+// 2. TỪ ĐIỂN DỊCH THUẬT GIAO DIỆN (ĐÃ TÍCH HỢP ĐỦ 10 CỘT ĐỘNG)
 // =========================================================================
 const dictionary = {
     vi: {
@@ -10,23 +10,23 @@ const dictionary = {
         metaDesc: "Truy cập phân tích kỹ thuật crypto, vàng nâng cao (MACD, Stoch RSI), và máy tính tài chính đa tiền tệ tính ROI, hoàn vốn, lãi kép.",
         navCrypto: "Thị Trường Crypto", navGold: "Giá Vàng & Kim Loại", navNews: "Tin Tức Tài Chính", navCalc: "Máy Tính Đầu Tư", navKnowledge: "Cẩm Nang Kiến Thức",
         heroTitle: "Hệ Thống Tiện Ích & Dữ Liệu Đầu Tư Phân Tích Tự Động", heroDesc: "Cập nhật chỉ số thời gian thực • Công cụ tính toán hiệu suất dòng tiền • Phân tích hệ thống Rule-Based",
-        titleCrypto: "📊 Dữ Liệu Chỉ Báo Crypto (Thời Gian Thực)", titleGold: "🏆 Chỉ Báo Xu Hướng Vàng & Kim Loại Quý", titleCalc: "🧮 Máy Tính Hiệu Suất Đầu Tư Bất Động Sản & Dòng Tiền",
+        titleCrypto: "📊 Dữ Liệu Chỉ Báo Crypto (Thời Gian Thực - Khung H1)", titleGold: "🏆 Chỉ Báo Xu Hướng Vàng & Kim Loại Quý (Khung H1)", titleCalc: "🧮 Máy Tính Hiệu Suất Đầu Tư Bất Động Sản & Dòng Tiền",
         titleNews: "📰 Tin Tức Tài Chính Toàn Cầu", titleKnowledge: "📚 Cẩm Nang Phân Tích Kỹ Thuật & Tối Ưu Hóa Vốn Đầu Tư", textLoading: "Đang kết nối API cơ sở dữ liệu...",
         
-        // Dịch Tiêu Đề Cột Bảng (Tích hợp Tooltip hướng xuống dưới)
-        thAsset: "Tài Sản", thPrice: "Giá Hiện Tại", thSignal: "Tín Hiệu Hệ Thống",
+        // Từ điển tiêu đề các cột
+        thAsset: "Tài Sản", thPrice: "Giá Hiện Tại", thSignal: "Tín Hiệu Hệ Thống", thEntry: "Entry", thTp: "Chốt Lời (TP)", thSl: "Cắt Lỗ (SL)",
         thMacd: 'MACD <span class="tooltip-icon" data-tooltip="Xác định xu hướng chính. Cắt lên = Xu hướng Tăng, Cắt xuống = Xu hướng Giảm.">i</span>',
         thStoch: 'Stoch RSI <span class="tooltip-icon" data-tooltip="Đo sức mạnh giá. Dưới 20 là vùng Quá bán (Sắp tăng), Trên 80 là vùng Quá mua (Sắp giảm).">i</span>',
-        thAtr: 'Chỉ số ATR <span class="tooltip-icon" data-tooltip="Đo lường mức độ biến động giá. Hỗ trợ đặt mức Cắt lỗ (Stop Loss) an toàn để tránh bị quét râu nến.">i</span>',
+        thAtr: 'Chỉ số ATR <span class="tooltip-icon" data-tooltip="Đo lường mức độ biến động giá nến H1. Dùng làm căn cứ tính khoảng cách Entry và điểm TP/SL an toàn.">i</span>',
         thStruct: 'Cấu Trúc Thị Trường <span class="tooltip-icon" data-tooltip="Phân tích hành vi giá. FVG (Vùng mất cân bằng) giúp định vị dòng tiền lớn (Cá mập) đang gom hàng.">i</span>',
         
-        calcDesc: "Nhập thông số dự án hoặc bất động sản (đất nền, chung cư) để hệ thống tự động tính toán tỷ suất sinh lời ROI và chu kỳ hoàn vốn.",
+        calcDesc: "Nhập thông số dự án hoặc bất động sản để hệ thống tự động tính toán tỷ suất sinh lời ROI và chu kỳ hoàn vốn.",
         labelIn1: "Vốn đầu tư ban đầu (VND):", labelIn2: "Thu nhập ròng từ sản phẩm hàng năm (VND):", labelIn3: "Tốc độ tăng giá trị tài sản kỳ vọng (%/năm):", btnCalcAction: "Kích Hoạt Tính Toán",
         titleCalcRes: "Kết Quả Phân Tích Dòng Tiền:", labelRes1: "Tỷ suất lợi nhuận dòng tiền:", labelRes2: "Dự kiến giá trị tài sản sau 3 năm:", labelRes3: "Thời gian hoàn vốn ròng:",
         titleAff: "Bắt đầu hành trình đầu tư của bạn với các nền tảng uy tín:", btnAffCrypto: "Mở Tài Khoản Giao Dịch Crypto", btnAffGold: "Đăng Ký Sàn Giao Dịch Vàng",
         fPrivacy: "Chính Sách Bảo Mật (Privacy Policy)", fTerms: "Điều Khoản Sử Dụng", fContact: "Liên Hệ Hợp Tác", unitYear: "năm",
         tagMap: { "Crypto": "Tiền Số", "Finance": "Tài Chính", "Gold & Metals": "Vàng & Đầu Tư", "Real Estate": "Bất Động Sản" },
-        dataMap: { "Mua": "Buy", "Bán": "Sell", "Theo dõi": "Watch", "Cắt lên (Tăng)": "Cross Up (Bullish)", "Cắt xuống (Giảm)": "Cross Down (Bearish)", "FVG Tăng / CHoCH": "Bullish FVG / CHoCH" },
+        dataMap: { "Mua": "Buy", "Bán": "Sell", "Theo dõi": "Watch", "Cắt lên (Tăng)": "Cross Up (Bullish)", "Cắt xuống (Giảm)": "Cross Down (Bearish)", "FVG Tăng / CHoCH": "Bullish FVG / CHoCH", "FVG Giảm / BOS": "Bearish FVG / BOS", "Theo xu hướng": "Trend Following", "Cấu trúc H1 chuẩn": "Standard H1 Struct" },
         articles: `<div class="article"><h3>1. Hệ thống tín hiệu toán học cố định (Rule-Based Trading) là gì?</h3><p>Hệ thống hoạt động hoàn toàn dựa trên các quy tắc toán học khắt khe và các chỉ báo kỹ thuật có sẵn, loại bỏ hoàn toàn yếu tố cảm xúc nhiễu của con người.</p></div>`
     },
     en: {
@@ -34,13 +34,13 @@ const dictionary = {
         metaDesc: "Access advanced crypto and gold technical analysis (MACD, Stoch RSI), real-time precious metals prices, and a multi-currency financial calculator.",
         navCrypto: "Crypto Market", navGold: "Gold & Metals", navNews: "Financial News", navCalc: "Investment Calculator", navKnowledge: "Knowledge Base",
         heroTitle: "Automated Investment Utility & Data Analytics System", heroDesc: "Real-time index updates • Cash flow performance tools • Rule-Based analytics system",
-        titleCrypto: "📊 Crypto Indicator Data (Real-Time)", titleGold: "🏆 Gold & Precious Metals Indicator Trend", titleCalc: "🧮 Real Estate & Cash Flow Performance Calculator",
+        titleCrypto: "📊 Crypto Indicator Data (Real-Time - H1 Timeframe)", titleGold: "🏆 Gold & Precious Metals Indicator Trend (H1)", titleCalc: "🧮 Real Estate & Cash Flow Performance Calculator",
         titleNews: "📰 Global Financial News Feed", titleKnowledge: "📚 Technical Analysis & Capital Optimization Guide", textLoading: "Connecting to database API...",
         
-        thAsset: "Asset", thPrice: "Current Price", thSignal: "System Signal",
+        thAsset: "Asset", thPrice: "Current Price", thSignal: "System Signal", thEntry: "Entry", thTp: "Take Profit", thSl: "Stop Loss",
         thMacd: 'MACD <span class="tooltip-icon" data-tooltip="Determines primary trend. Cross Up = Bullish momentum, Cross Down = Bearish momentum.">i</span>',
         thStoch: 'Stoch RSI <span class="tooltip-icon" data-tooltip="Momentum strength. Below 20 is Oversold (Buy signal), Above 80 is Overbought (Sell signal).">i</span>',
-        thAtr: 'ATR Index <span class="tooltip-icon" data-tooltip="Measures price volatility. Used to set safe Stop Loss (SL) levels avoiding market noise.">i</span>',
+        thAtr: 'ATR Index <span class="tooltip-icon" data-tooltip="Measures H1 candlestick price volatility. Used to calculate optimal entry points and safe TP/SL parameters.">i</span>',
         thStruct: 'Market Structure <span class="tooltip-icon" data-tooltip="Price Action analysis. FVG (Fair Value Gap) identifies institutional liquidity imbalances.">i</span>',
         
         calcDesc: "Enter project or real estate metrics (land plots, apartments) to automatically calculate ROI and payback period.",
@@ -49,7 +49,7 @@ const dictionary = {
         titleAff: "Start your investment journey with trusted platforms:", btnAffCrypto: "Open Crypto Trading Account", btnAffGold: "Register Gold Trading Account",
         fPrivacy: "Privacy Policy", fTerms: "Terms of Service", fContact: "Contact Partnership", unitYear: "years",
         tagMap: { "Crypto": "Crypto", "Finance": "Finance", "Gold & Metals": "Gold & Metals", "Real Estate": "Real Estate" },
-        dataMap: { "Mua": "Buy", "Bán": "Sell", "Theo dõi": "Watch", "Cắt lên (Tăng)": "Cross Up (Bullish)", "Cắt xuống (Giảm)": "Cross Down (Bearish)", "FVG Tăng / CHoCH": "Bullish FVG / CHoCH" },
+        dataMap: { "Mua": "Buy", "Bán": "Sell", "Theo dõi": "Watch", "Cắt lên (Tăng)": "Cross Up (Bullish)", "Cắt xuống (Giảm)": "Cross Down (Bearish)", "FVG Tăng / CHoCH": "Bullish FVG / CHoCH", "FVG Giảm / BOS": "Bearish FVG / BOS", "Theo xu hướng": "Trend Following", "Cấu trúc H1 chuẩn": "Standard H1 Struct" },
         articles: `<div class="article"><h3>1. What is Rule-Based Trading?</h3><p>The system operates strictly on explicit mathematical rules and mechanical technical indicators, completely eliminating human emotional bias.</p></div>`
     }
 };
@@ -59,9 +59,6 @@ let masterData = { trading: [], news: [] };
 let currentExchangeRate = 25400; 
 let isFirstLoad = true;
 
-// =========================================================================
-// 3. API TỶ GIÁ THỜI GIAN THỰC (USD/VND)
-// =========================================================================
 async function fetchExchangeRate() {
     try {
         const res = await fetch('https://open.er-api.com/v6/latest/USD');
@@ -94,14 +91,12 @@ function applyLanguage() {
     const metaDescriptionTag = document.querySelector('meta[name="description"]');
     if (metaDescriptionTag) { metaDescriptionTag.setAttribute('content', lang.metaDesc); }
     
-    // Dịch Menu thanh điều hướng
     document.getElementById('nav-crypto').innerText = lang.navCrypto;
     document.getElementById('nav-gold').innerText = lang.navGold;
     document.getElementById('nav-news').innerText = lang.navNews;
     document.getElementById('nav-calc').innerText = lang.navCalc;
     document.getElementById('nav-knowledge').innerText = lang.navKnowledge;
     
-    // Dịch các Tiêu đề Phân khu
     document.getElementById('hero-title').innerText = lang.heroTitle;
     document.getElementById('hero-desc').innerText = lang.heroDesc;
     document.getElementById('title-crypto').innerText = lang.titleCrypto;
@@ -110,7 +105,7 @@ function applyLanguage() {
     document.getElementById('title-news').innerText = lang.titleNews;
     document.getElementById('title-knowledge').innerText = lang.titleKnowledge;
     
-    // Dịch Tiêu đề tất cả các Cột của 2 Bảng cùng lúc bằng Class
+    // Khớp tiêu đề cột động cho cả 2 bảng
     document.querySelectorAll('.th-asset').forEach(el => el.innerText = lang.thAsset);
     document.querySelectorAll('.th-price').forEach(el => el.innerText = lang.thPrice);
     document.querySelectorAll('.th-signal').forEach(el => el.innerHTML = lang.thSignal);
@@ -118,6 +113,9 @@ function applyLanguage() {
     document.querySelectorAll('.th-stoch').forEach(el => el.innerHTML = lang.thStoch);
     document.querySelectorAll('.th-atr').forEach(el => el.innerHTML = lang.thAtr);
     document.querySelectorAll('.th-struct').forEach(el => el.innerHTML = lang.thStruct);
+    document.querySelectorAll('.th-entry').forEach(el => el.innerText = lang.thEntry);
+    document.querySelectorAll('.th-tp').forEach(el => el.innerText = lang.thTp);
+    document.querySelectorAll('.th-sl').forEach(el => el.innerText = lang.thSl);
     
     document.getElementById('calc-desc').innerText = lang.calcDesc;
     document.getElementById('label-in-1').innerText = lang.labelIn1;
@@ -156,9 +154,6 @@ function applyLanguage() {
     calculateROI();
 }
 
-// =========================================================================
-// 4. MÁY TÍNH HIỆU SUẤT ĐẦU TƯ
-// =========================================================================
 function calculateROI() {
     const investAmount = parseFloat(document.getElementById('invest-amount').value);
     const annualIncome = parseFloat(document.getElementById('annual-income').value);
@@ -176,9 +171,6 @@ function calculateROI() {
     document.getElementById('res-period').innerText = period.toFixed(1) + " " + dictionary[currentLang].unitYear;
 }
 
-// =========================================================================
-// 5. PHÂN TÁCH VÀ VẼ 2 BẢNG ĐỘC LẬP (CRYPTO VS KIM LOẠI QUÝ)
-// =========================================================================
 function renderTables() {
     const cryptoBody = document.getElementById('data-body');
     const metalsBody = document.getElementById('metals-body');
@@ -193,11 +185,18 @@ function renderTables() {
         const transStruct = currentLang === 'en' ? (lang.dataMap[row.structure] || row.structure) : row.structure;
         const transSignal = currentLang === 'en' ? (lang.dataMap[row.signal] || row.signal) : row.signal;
         
-        // Định dạng đuôi tiền tệ hợp ngữ cảnh (Vàng hiện /oz, Coin hiện USD)
         const isMetal = row.asset.includes("XAU") || row.asset.includes("XAG");
         const priceDisplay = isMetal 
             ? "$" + parseFloat(row.price).toLocaleString() + " / oz"
             : parseFloat(row.price).toLocaleString() + " USD";
+
+        // Định dạng hiển thị dấu cho Entry, TP, SL dựa trên loại tài sản
+        const formatValue = (val) => {
+            if (!val || val === "-") return "-";
+            const num = parseFloat(val);
+            if (isNaN(num)) return val;
+            return isMetal ? "$" + num.toLocaleString() : num.toLocaleString() + " USD";
+        };
 
         const tr = document.createElement('tr');
         tr.innerHTML = `
@@ -210,9 +209,11 @@ function renderTables() {
             <td>${row.stochRsi}</td>
             <td>${row.atr}</td>
             <td>${transStruct}</td>
+            <td style="color: #f0b90b; font-weight: bold;">${formatValue(row.entry)}</td>
+            <td style="color: #02c076; font-weight: bold;">${formatValue(row.tp)}</td>
+            <td style="color: #f44336; font-weight: bold;">${formatValue(row.sl)}</td>
         `;
         
-        // Phân loại hàng ném vào đúng bảng
         if (isMetal) {
             metalsBody.appendChild(tr);
         } else {
@@ -251,7 +252,6 @@ async function fetchMasterData() {
     } catch (error) { console.error('Lỗi nạp dữ liệu Master:', error); }
 }
 
-// KHỞI CHẠY HỆ THỐNG
 fetchExchangeRate().then(() => {
     applyLanguage();
     fetchMasterData();

@@ -228,12 +228,15 @@ function renderNewsFeed() {
     newsContainer.innerHTML = '';
     const filteredNews = masterData.news.filter(item => item.lang === currentLang);
     const langMap = dictionary[currentLang].tagMap;
+    
     filteredNews.forEach(item => {
         const displayTag = langMap[item.category] || item.category;
         const div = document.createElement('div');
         div.className = 'news-card';
+        
+        // CẬP NHẬT: Thêm target="_blank" để mở tab mới và rel="..." để bảo mật hiệu năng
         div.innerHTML = `
-            <a href="${item.link}" target="_blank"><h3>${item.title}</h3></a>
+            <a href="${item.link}" target="_blank" rel="noopener noreferrer"><h3>${item.title}</h3></a>
             <div class="news-meta">
                 <span class="news-tag">${displayTag}</span>
                 <span class="news-time">${item.time}</span>

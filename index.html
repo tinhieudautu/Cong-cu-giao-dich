@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real-time Crypto Signals | Gold Silver Price Tracker | Financial Calculator</title>
-    <meta name="description" content="Access advanced crypto technical analysis (MACD, Stoch RSI), real-time gold & silver prices, and a multi-currency financial calculator for ROI, payback, and compound interest. Rule-based investment data for global traders.">
+    
+    <title>Real-time Crypto & Gold Signals | Financial Calculator</title>
+    <meta name="description" content="Access advanced crypto and gold technical analysis (MACD, Stoch RSI), real-time precious metals prices, and a multi-currency financial calculator for ROI, payback, and compound interest.">
     <meta name="keywords" content="crypto signals, MACD, Stoch RSI, rule-based trading, gold price live, real estate ROI calculator, investment tools">
     <meta name="author" content="FINtechDATA">
     <meta name="robots" content="index, follow">
-    
+
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2149628736519509"
      crossorigin="anonymous"></script>
 
@@ -22,6 +23,7 @@
             <nav>
                 <a href="#crypto-section" id="nav-crypto">Thị Trường Crypto</a>
                 <a href="#gold-section" id="nav-gold">Giá Vàng & Kim Loại</a>
+                <a href="#news-section" id="nav-news">Tin Tức Tài Chính</a>
                 <a href="#calc-section" id="nav-calc">Máy Tính Đầu Tư</a>
                 <a href="#knowledge-section" id="nav-knowledge">Cẩm Nang Kiến Thức</a>
             </nav>
@@ -52,34 +54,17 @@
                 <table>
                     <thead>
                         <tr>
-                            <th id="th-asset">Tài Sản</th>
-                            <th id="th-price">Giá Hiện Tại</th>
-                            <th id="th-signal">Tín Hiệu Hệ Thống</th>
-                            <th id="th-macd">MACD</th>
-                            <th id="th-stoch">Stoch RSI</th>
-                            <th id="th-atr">Chỉ số ATR</th>
-                            <th id="th-struct">Cấu Trúc Thị Trường</th>
+                            <th class="th-asset">Tài Sản</th>
+                            <th class="th-price">Giá Hiện Tại</th>
+                            <th class="th-signal">Tín Hiệu Hệ Thống</th>
+                            <th class="th-macd">MACD</th>
+                            <th class="th-stoch">Stoch RSI</th>
+                            <th class="th-atr">Chỉ số ATR</th>
+                            <th class="th-struct">Cấu Trúc Thị Trường</th>
                         </tr>
                     </thead>
                     <tbody id="data-body">
-                        <tr>
-                            <td><div class="skeleton skeleton-text" style="width: 70%;"></div></td>
-                            <td><div class="skeleton skeleton-text" style="width: 90%;"></div></td>
-                            <td><div class="skeleton skeleton-text" style="width: 60%;"></div></td>
-                            <td><div class="skeleton skeleton-text" style="width: 80%;"></div></td>
-                            <td><div class="skeleton skeleton-text" style="width: 50%;"></div></td>
-                            <td><div class="skeleton skeleton-text" style="width: 50%;"></div></td>
-                            <td><div class="skeleton skeleton-text" style="width: 100%;"></div></td>
-                        </tr>
-                        <tr>
-                            <td><div class="skeleton skeleton-text" style="width: 60%;"></div></td>
-                            <td><div class="skeleton skeleton-text" style="width: 80%;"></div></td>
-                            <td><div class="skeleton skeleton-text" style="width: 70%;"></div></td>
-                            <td><div class="skeleton skeleton-text" style="width: 50%;"></div></td>
-                            <td><div class="skeleton skeleton-text" style="width: 60%;"></div></td>
-                            <td><div class="skeleton skeleton-text" style="width: 40%;"></div></td>
-                            <td><div class="skeleton skeleton-text" style="width: 90%;"></div></td>
-                        </tr>
+                        <tr><td colspan="7"><div class="skeleton skeleton-text"></div></td></tr>
                     </tbody>
                 </table>
             </div>
@@ -91,45 +76,36 @@
 
         <section id="gold-section" class="card-section">
             <div class="section-header">
-                <h2 id="title-gold">🏆 Tra Cứu Giá Vàng & Kim Loại Quý</h2>
+                <h2 id="title-gold">🏆 Chỉ Báo Xu Hướng Vàng & Kim Loại Quý</h2>
                 <span class="badge gold">Gold API</span>
             </div>
-            <div class="grid-2">
-                <div class="gold-item">
-                    <h3 id="label-gold-world">Vàng Thế Giới (XAU/USD)</h3>
-                    <p class="price-display" id="gold-world"><div class="skeleton skeleton-price"></div></p>
-                </div>
-                <div class="gold-item">
-                    <h3 id="label-silver-world">Bạc Thế Giới (XAG/USD)</h3>
-                    <p class="price-display silver" id="silver-world"><div class="skeleton skeleton-price"></div></p>
-                </div>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="th-asset">Tài Sản</th>
+                            <th class="th-price">Giá Hiện Tại</th>
+                            <th class="th-signal">Tín Hiệu Hệ Thống</th>
+                            <th class="th-macd">MACD</th>
+                            <th class="th-stoch">Stoch RSI</th>
+                            <th class="th-atr">Chỉ số ATR</th>
+                            <th class="th-struct">Cấu Trúc Thị Trường</th>
+                        </tr>
+                    </thead>
+                    <tbody id="metals-body">
+                        <tr><td colspan="7"><div class="skeleton skeleton-text"></div></td></tr>
+                    </tbody>
+                </table>
             </div>
         </section>
 
-        <!-- PHÂN KHU TỰ ĐỘNG CẬP NHẬT TIN TỨC TÀI CHÍNH -->
         <section id="news-section" class="card-section">
             <div class="section-header">
                 <h2 id="title-news">📰 Tin Tức Tài Chính Toàn Cầu</h2>
                 <span class="badge">Live Feed</span>
             </div>
-            <!-- Khung lưới hiển thị danh sách tin tức -->
             <div class="news-grid" id="news-container">
-                <div class="news-card">
-                    <div class="skeleton skeleton-title"></div>
-                    <div class="skeleton skeleton-title" style="width: 80%;"></div>
-                    <div class="news-meta" style="margin-top: 15px;">
-                        <div class="skeleton skeleton-meta"></div>
-                        <div class="skeleton skeleton-meta" style="width: 25%;"></div>
-                    </div>
-                </div>
-                <div class="news-card">
-                    <div class="skeleton skeleton-title"></div>
-                    <div class="skeleton skeleton-title" style="width: 90%;"></div>
-                    <div class="news-meta" style="margin-top: 15px;">
-                        <div class="skeleton skeleton-meta"></div>
-                        <div class="skeleton skeleton-meta" style="width: 30%;"></div>
-                    </div>
-                </div>
+                <div class="news-card"><div class="skeleton skeleton-title"></div></div>
             </div>
         </section>
 
@@ -137,7 +113,7 @@
             <div class="section-header">
                 <h2 id="title-calc">🧮 Máy Tính Hiệu Suất Đầu Tư Bất Động Sản & Dòng Tiền</h2>
             </div>
-            <p class="calc-desc" id="calc-desc">Nhập thông số dự án hoặc bất động sản (đất nền, chung cư) để hệ thống tự động tính toán tỷ suất sinh lời ROI và chu kỳ hoàn vốn.</p>
+            <p class="calc-desc" id="calc-desc">Nhập thông số dự án hoặc bất động sản để hệ thống tự động tính toán tỷ suất sinh lời ROI và chu kỳ hoàn vốn.</p>
             
             <div class="grid-2-calc">
                 <div class="calc-inputs">

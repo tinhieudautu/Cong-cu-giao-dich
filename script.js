@@ -27,7 +27,31 @@ const dictionary = {
         fPrivacy: "Chính Sách Bảo Mật (Privacy Policy)", fTerms: "Điều Khoản Sử Dụng", fContact: "Liên Hệ Hợp Tác", unitYear: "năm",
         tagMap: { "Crypto": "Tiền Số", "Finance": "Tài Chính", "Gold & Metals": "Vàng & Đầu Tư", "Real Estate": "Bất Động Sản" },
         dataMap: { "Mua": "Buy", "Bán": "Sell", "Theo dõi": "Watch", "Cắt lên (Tăng)": "Cross Up (Bullish)", "Cắt xuống (Giảm)": "Cross Down (Bearish)", "FVG Tăng / CHoCH": "Bullish FVG / CHoCH", "FVG Giảm / BOS": "Bearish FVG / BOS", "Theo xu hướng": "Trend Following", "Cấu trúc H1 chuẩn": "Standard H1 Struct" },
-        articles: `<div class="article"><h3>1. Hệ thống tín hiệu toán học cố định (Rule-Based Trading) là gì?</h3><p>Hệ thống hoạt động hoàn toàn dựa trên các quy tắc toán học khắt khe và các chỉ báo kỹ thuật có sẵn, loại bỏ hoàn toàn yếu tố cảm xúc nhiễu của con người.</p></div>`
+        articles: `
+    <div class="knowledge-card">
+        <div class="knowledge-badge">Hệ Thống</div>
+        <h3>1. Giao dịch dựa trên quy tắc (Rule-Based Trading) là gì?</h3>
+        <p>Hệ thống hoạt động hoàn toàn dựa trên các công thức toán học khắt khe và bộ chỉ báo kỹ thuật cố định (MACD, Stoch RSI, ATR). Phương pháp này loại bỏ hoàn toàn yếu tố cảm xúc, tâm lý fomo hay nỗi sợ hãi của con người – những tác nhân cốt lõi dẫn đến 90% thất bại trong đầu tư. Khi các điều kiện hàm (if-else) được thỏa mãn cùng lúc, tín hiệu Mua/Bán sẽ tự động kích hoạt.</p>
+    </div>
+
+    <div class="knowledge-card">
+        <div class="knowledge-badge">Chỉ Báo</div>
+        <h3>2. Ứng dụng MACD kết hợp Stoch RSI để lọc tín hiệu nhiễu</h3>
+        <p>Trên khung thời gian H1, MACD đóng vai trò định vị xu hướng chủ đạo (Đường MACD cắt lên đường Tín hiệu thể hiện đà Tăng trưởng). Tuy nhiên, MACD thường có độ trễ. Để tối ưu điểm vào lệnh, hệ thống kết hợp thêm <strong>Stoch RSI dưới vùng 25 (Quá bán)</strong>. Sự kết hợp này giúp bẫy được các nhịp điều chỉnh ngắn hạn trong một xu hướng tăng tổng thể, mang lại điểm Entry có tỷ lệ chiến thắng cao.</p>
+    </div>
+
+    <div class="knowledge-card">
+        <div class="knowledge-badge">Quản Trị Vốn</div>
+        <h3>3. Quản trị rủi ro tối ưu theo biên độ biến động ATR</h3>
+        <p>Hệ thống không đặt điểm Chốt lời (TP) và Cắt lỗ (SL) theo cảm tính hoặc theo một số phần trăm cố định. Mỗi tài sản có một biên độ dao động khác nhau. Chỉ số <strong>ATR (Average True Range)</strong> đo lường chính xác độ biến động của 14 cây nến H1 gần nhất. Công thức cốt lõi của hệ thống thiết lập: Cắt lỗ tại mốc <code>Entry - 2*ATR</code> và Chốt lời tại mốc <code>Entry + 4*ATR</code>, đảm bảo tỷ lệ Risk:Reward (Rủi ro:Lợi nhuận) luôn đạt mức 1:2 chuẩn quốc tế.</p>
+    </div>
+
+    <div class="knowledge-card">
+        <div class="knowledge-badge">Dòng Tiền</div>
+        <h3>4. Hiểu về vùng mất cân bằng giá (Fair Value Gap - FVG)</h3>
+        <p>Cấu trúc thị trường FVG xuất hiện khi có một lực mua hoặc bán cực mạnh đột ngột từ các tổ chức tài chính lớn (Cá mập), tạo ra khoảng trống thanh khoản giữa nến số 1 và nến số 3. Hệ thống Rule-Based nhận diện các vùng FVG này kết hợp với sự thay đổi cấu trúc xu hướng (CHoCH/BOS) để xác định xem dòng tiền thông minh đang tham gia gom hàng hay phân phối, từ đó đưa ra định hướng chiến lược chính xác.</p>
+    </div>
+`
     },
     en: {
         pageTitle: "Real-time Crypto & Gold Signals | Financial Calculator",
@@ -50,7 +74,31 @@ const dictionary = {
         fPrivacy: "Privacy Policy", fTerms: "Terms of Service", fContact: "Contact Partnership", unitYear: "years",
         tagMap: { "Crypto": "Crypto", "Finance": "Finance", "Gold & Metals": "Gold & Metals", "Real Estate": "Real Estate" },
         dataMap: { "Mua": "Buy", "Bán": "Sell", "Theo dõi": "Watch", "Cắt lên (Tăng)": "Cross Up (Bullish)", "Cắt xuống (Giảm)": "Cross Down (Bearish)", "FVG Tăng / CHoCH": "Bullish FVG / CHoCH", "FVG Giảm / BOS": "Bearish FVG / BOS", "Theo xu hướng": "Trend Following", "Cấu trúc H1 chuẩn": "Standard H1 Struct" },
-        articles: `<div class="article"><h3>1. What is Rule-Based Trading?</h3><p>The system operates strictly on explicit mathematical rules and mechanical technical indicators, completely eliminating human emotional bias.</p></div>`
+        articles: `
+    <div class="knowledge-card">
+        <div class="knowledge-badge">System</div>
+        <h3>1. What is Rule-Based Trading?</h3>
+        <p>The system operates strictly on explicit mathematical rules and mechanical technical indicators (MACD, Stoch RSI, ATR), completely eliminating human emotional bias, FOMO, or panic. Signals are generated only when all algorithmic parameters align simultaneously.</p>
+    </div>
+
+    <div class="knowledge-card">
+        <div class="knowledge-badge">Indicators</div>
+        <h3>2. Combining MACD and Stoch RSI to Filter Noise</h3>
+        <p>On the H1 timeframe, MACD identifies the primary momentum. To optimize entry points, the system pairs it with <strong>Stoch RSI below 25 (Oversold)</strong>. This consensus catches minor pullbacks within a major uptrend, securing high-probability entries.</p>
+    </div>
+
+    <div class="knowledge-card">
+        <div class="knowledge-badge">Risk Management</div>
+        <h3>3. Capital Optimization Based on ATR Volatility</h3>
+        <p>Instead of arbitrary percentage targets, the system uses the <strong>Average True Range (ATR)</strong> of the last 14 hourly candles. Stop Loss is mechanically set at <code>Entry - 2*ATR</code>, and Take Profit at <code>Entry + 4*ATR</code>, locking in a strict 1:2 Risk:Reward ratio.</p>
+    </div>
+
+    <div class="knowledge-card">
+        <div class="knowledge-badge">Market Structure</div>
+        <h3>4. Deciphering Fair Value Gaps (FVG) and Liquidity</h3>
+        <p>A Fair Value Gap occurs when aggressive institutional order flow creates a liquidity imbalance between the 1st and 3rd candles. The system detects these zones alongside Market Structure Shifts (CHoCH/BOS) to track where smart money is accumulating assets.</p>
+    </div>
+`
     }
 };
 
